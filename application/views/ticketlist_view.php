@@ -113,8 +113,55 @@
                             <div class="ibox-title">
                                 <h5>Lista de tickets</h5>
                                 <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs">Crear nuevo ticket</a>
+                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
                                 </div>
+
+                                <!-- start modal -->
+                                <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content animated fadeIn">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <i class="fa fa-user modal-icon"></i>
+                                                <h4 class="modal-title">Nuevo Ticket</h4>
+                                                <small class="font-bold">Registe a continuación la información, sobre factura e inconveniente del producto.</small>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label>Empresa</label> 
+                                                        <select class="form-control m-b" name="account">
+                                                            <option>Kindred</option>
+                                                            <option>Comercializadora Kinsman</option>
+                                                        </select>
+                                                    </div>
+                                              
+                                                    <div class="form-group">
+                                                        <label>ID Factura</label> 
+                                                        <input type="text" placeholder="Codigo de Factura" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Titulo</label> 
+                                                        <input type="text" placeholder="Descripcion rapida del problema" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Descripcion del inconveniente y acuerdo</label> 
+                                                        <textarea class="form-control" name="textarea" rows="5" placeholder="Descripcion detallada del problema"></textarea>
+                                                    </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary">Registrar ticket</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end modal -->
+
                             </div>
                             <div class="ibox-content">
 
@@ -128,16 +175,8 @@
                                     </div>
                                     <div class="m-t-md">
 
-                                        <div class="pull-right">
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-comments"></i> </button>
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-list"></i> </button>
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
-                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
-                                        </div>
-
-                                        <strong>Found 61 issues.</strong>
+                                        
+                                        <strong>0 tickers pendientes.</strong>
 
 
 
@@ -172,9 +211,15 @@
                                                 2d
                                             </td>
                                             <td class="text-right">
-                                                <button class="btn btn-white btn-xs"> Tag</button>
-                                                <button class="btn btn-white btn-xs"> Mag</button>
-                                                <button class="btn btn-white btn-xs"> Rag</button>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
+                                                    <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li><a class="btn-xs btn_confirm_asistencia" data-codigo="68"><i class="fa fa-eye"></i> Ver detalle</a></li>
+                                                        <li><a class="btn-xs btn_confirm_asistencia" data-codigo="68"><i class="fa fa-thumbs-up"></i> Solucionado</a></li>
+                                                        <li><a class="btn-xs btn_cancel_asistencia" data-codigo="68"><i class="fa fa-thumbs-down"></i> Sin solucion</a></li>
+                                                    </ul>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>

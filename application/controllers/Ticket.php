@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Registro extends CI_Controller {
+class Ticket extends CI_Controller {
 
 	public function __constructor() {
 		parent::__construct();
@@ -20,7 +20,7 @@ class Registro extends CI_Controller {
 			
 			
 		}else{
-			redirect('registro/nuevo');
+			$this->load->view('ticketlist_view');
 		}
 		
 	}
