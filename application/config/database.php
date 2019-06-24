@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOIMPK_V7',
+	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOKIND_V7',
 	'username' => 'programacion',
 	'password' => 'progra123',
-	'database' => 'MODELOIMPK_V7',
+	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
