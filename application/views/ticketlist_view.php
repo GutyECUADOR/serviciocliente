@@ -123,46 +123,48 @@
                                 <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content animated fadeIn">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                <i class="fa fa-user modal-icon"></i>
-                                                <h4 class="modal-title">Nuevo Ticket</h4>
-                                                <small class="font-bold">Registe a continuación la información, sobre factura e inconveniente del producto.</small>
-                                            </div>
-                                            <div class="modal-body">
+                                            <form id="registerticket" action="#">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <i class="fa fa-user modal-icon"></i>
+                                                    <h4 class="modal-title">Nuevo Ticket</h4>
+                                                    <small class="font-bold">Registe a continuación la información, sobre factura e inconveniente del producto.</small>
+                                                </div>
+                                                <div class="modal-body">
 
-                                                    <div class="form-group">
-                                                        <label>Local / Bodega</label> 
-                                                        <select class="form-control m-b" id="bodega" name="bodega">
-                                                            <?php 
-                                                                foreach($arraybodegas as $row) { 
-                                                                echo '<option value="'.$row['CODIGO'].'">'.$row['NOMBRE'].'</option>';
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                              
-                                                    <div class="form-group">
-                                                        <label>ID Factura</label> 
-                                                        <input type="text" placeholder="992014XXX00000XXX" class="form-control">
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label>Local / Bodega</label> 
+                                                            <select class="form-control m-b" id="bodega" name="bodega" required>
+                                                                <?php 
+                                                                    foreach($arraybodegas as $row) { 
+                                                                    echo '<option value="'.$row['CODIGO'].'">'.$row['NOMBRE'].'</option>';
+                                                                    }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                
+                                                        <div class="form-group">
+                                                            <label>ID Factura</label> 
+                                                            <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required>
+                                                        </div>
 
-                                                    <div class="form-group">
-                                                        <label>Titulo</label> 
-                                                        <input type="text" placeholder="Descripcion rapida del problema" class="form-control">
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label>Titulo</label> 
+                                                            <input type="text" id="titulo" name="titulo" placeholder="Descripcion rapida del problema" class="form-control" required>
+                                                        </div>
 
-                                                    <div class="form-group">
-                                                        <label>Descripcion del inconveniente y acuerdo</label> 
-                                                        <textarea class="form-control" name="textarea" rows="5" placeholder="Descripcion detallada del problema"></textarea>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label>Descripcion del inconveniente y acuerdo</label> 
+                                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Descripcion detallada del problema" required></textarea>
+                                                        </div>
 
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary">Registrar ticket</button>
-                                            </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary">Registrar ticket</button>
+                                                </div>
+                                            </form>   
                                         </div>
                                     </div>
                                 </div>
@@ -180,14 +182,7 @@
                                             <button id="btnSearch" type="button" class="btn btn-primary"> Buscar</button>
                                         </span>
                                     </div>
-                                    <div class="m-t-md">
-
-                                        
-                                        <strong>0 tickers pendientes.</strong>
-
-
-
-                                    </div>
+                                    
 
                                 </div>
 

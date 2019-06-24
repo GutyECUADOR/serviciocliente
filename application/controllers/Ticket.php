@@ -32,74 +32,53 @@ class Ticket extends CI_Controller {
 
 	
 	public function register() {
-		$response = array('error'=> TRUE, 'message' => 'Lo sentimos, no hemos podido completar tu registro, reintente mas tarde');
-
+		
 		if (!empty($_POST)) {
-            $nombres = strtoupper($this->input->post('nombres'));
-			$apellidos = strtoupper($this->input->post('apellidos'));
-			$telefono = $this->input->post('telefono');
-            $celular = $this->input->post('celular');
-			$email = $this->input->post('email');
-
-			$tipoinstitucion = strtoupper($this->input->post('tipoinstitucion'));
-			$nombreinstitucion = strtoupper($this->input->post('nombreinstitucion'));
-			$cargo = strtoupper($this->input->post('cargo'));
-			
-			$ruc = $this->input->post('ruc');
-			$formapago = $this->input->post('formapago');
-			$fechamaxima = $this->input->post('fechamaxima');
-			$contactoconta = $this->input->post('contactoconta');
-			$emailconta = $this->input->post('emailconta');
-			$reemplazo = $this->input->post('reemplazo');
-
-			$observaciones = $this->input->post('observaciones');
-
-			
+            $bodega = strtoupper($this->input->post('bodega'));
+			$facturaID = strtoupper($this->input->post('facturaID'));
+			$titulo = $this->input->post('titulo');
+            $descripcion = $this->input->post('descripcion');
+		
             // Checking if everything is there
-            if ($nombres && $apellidos && $celular && $email ) {
+            if ($bodega && $facturaID && $titulo && $descripcion ) {
 				
 				// Loading model
 				$this->load->model('usuario');
 				
                 $data = array(
-					'titulo' => null,
-					'nombres' => $nombres,
-					'apellidos' => $apellidos,
-					'cargo' => $cargo,
-					'telefono' => $telefono,
-					'celular' => $celular,
-					'correo' => $email,
-					'tipoinstitucion' => $tipoinstitucion,
-					'nombreinstitucion' => $nombreinstitucion,
-					'estado' => 'PENDIENTE PAGO',
-					'ruc' => $ruc,
-					'direccion' => '',
-					'formapago' => $formapago,
-					'fechamaxima' => $fechamaxima,
-					'contactoconta' => $contactoconta,
-					'emailconta' => $emailconta,
-					'reemplazo' => $reemplazo,
-					'observaciones' => $observaciones,
-					'asistencia' => '0',
-					'pago' => '0',
+					'codigo' => 'KAO000004',
+					'empresa' => '008',
+					'bodega' => $bodega,
+					'facturaID' => $facturaID,
+					'encargadoID' => '1600505505',
+					'fecha' => '2019-06-24',
+					'titulo' => $titulo,
+					'descripcion' => $descripcion,
+					'estado' => 0
                 );
                 
-                if ($ID = $this->usuario->addinscripcion($data)) {
+                if ($ID = $this->usuario->addticket($data)) {
 					
 					$response = array(
 						'error'     => FALSE, 
-						'message'     => 'Registro exitoso, Bienvenido '.$nombres, 
+						'message'     => 'Registro exitoso', 
 						'nuevo_id'  => $ID
 						);
               
-					
+					echo json_encode($response);
 				}
 				
+			}else{
+				$response = array('error'=> TRUE, 'message' => 'Lo sentimos, no se han ingresado todos los parametros, reintente');
+				echo json_encode($response);
 			}
 			
-        }
+        }else{
+			$response = array('error'=> TRUE, 'message' => 'Lo sentimos, peticion nula, reintente');
+			echo json_encode($response);
+		}
         
-		echo json_encode($response);
+		
     }
 
     public function gettickets($search='KAO'){

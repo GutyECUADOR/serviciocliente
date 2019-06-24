@@ -10,12 +10,12 @@ $(function() {
         todayHighlight: true
     });
 
-    let registerForm = $('#registerForm');
+    let registerForm = $('#registerticket');
     registerForm.submit(function (event) {
         event.preventDefault();
 
         $.ajax({
-            url: 'register',
+            url: 'ticket/register',
             method: 'POST',
             data: registerForm.serialize(),
 
@@ -23,6 +23,7 @@ $(function() {
                 console.log(response);
                 let responseJSON = JSON.parse(response);
                 console.log(responseJSON);
+                console.log(registerForm.serialize());
                
                 if (responseJSON.error == false) {
                     toastr.success(responseJSON.message, 'Realizado', {timeOut: 5000});
@@ -139,7 +140,7 @@ $(function() {
     
         },
         getStatus: function(statuscode){
-            if (statuscode==0) {
+            if (statuscode==1) {
                 return `<span class="label label-primary">Solucionado</span>`;
             }else{
                 return `<span class="label label-warning">Pendiente</span>`;
