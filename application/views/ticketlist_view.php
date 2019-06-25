@@ -38,7 +38,7 @@
                             <span>
                                 <img src="http://kaosportcenter.com/img/logoKAOdark.png" height="25px" alt="logo">
                             </span>
-                            
+                            <?php  echo 'Bienvenido, '. $this->session->userdata('codedatabase'); ?>
                         </div>
                         <div class="logo-element">
                             IN+

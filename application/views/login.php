@@ -53,9 +53,7 @@
                     <select class="form-control m-b" id="tipoinstitucion" name="tipoinstitucion" required="">
                         <option value="">Seleccione empresa por favor</option>
                             <?php 
-                                foreach ($databasesArray as $row)
-                                {
-                                  
+                                foreach ($databasesArray as $row) {
                                     echo "<option value='$row->Codigo'>$row->Nombre</option>";
                                 }
                             ?>

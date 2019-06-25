@@ -21,12 +21,14 @@ class Login extends CI_Controller {
 		if (!empty($_POST)) {
 			$usuario = $this->input->post('usuario');
 			$password = $this->input->post('password');
+			$codedatabase = $this->input->post('tipoinstitucion');
 
 			$dataDB = $this->usuario->checklogin($usuario, $password);
 
 			if ($usuario==trim($dataDB->Cedula) && $password==trim($dataDB->Clave)) {
 				$newdata = array(
 					'usercode'  => $dataDB->Codigo,
+					'codedatabase' => $codedatabase,
 					'cedula' => $dataDB->Cedula,
 					'nombreusuario'  => $dataDB->Nombre . $dataDB->Apellido,
 					'role'     => $dataDB->CodDpto,

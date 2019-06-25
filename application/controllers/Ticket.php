@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ticket extends CI_Controller {
 
+
+	private $codeDB;
+
 	public function __constructor() {
 		parent::__construct();
     }
@@ -43,11 +46,11 @@ class Ticket extends CI_Controller {
 				
                 $data = array(
 					'codigo' => 'KAO000001',
-					'empresa' => '008',
+					'empresa' => $this->session->userdata('codedatabase'),
 					'bodega' => $bodega,
 					'facturaID' => $facturaID,
 					'encargadoID' => '1600505505',
-					'fecha' => '2019-06-24',
+					'fecha' => date('Ymd'),
 					'titulo' => $titulo,
 					'descripcion' => $descripcion,
 					'estado' => 0
@@ -78,29 +81,14 @@ class Ticket extends CI_Controller {
     }
 
     public function gettickets($search='KAO'){
-		$query = $this->db->query("
-			SELECT TOP 100
-				VEN_CAB.ID,
-				bodega.NOMBRE as nombreBodega,
-				cliente.CODIGO as codCliente,
-				cliente.RUC as ruc,
-				cliente.NOMBRE as nombreCliente,
-				ticket.*
-			FROM 
-				dbo.VEN_CAB
-				INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
-				INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
-				INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
-			WHERE cliente.NOMBRE LIKE '$search%' or ticket.codigo LIKE '$search%'
-									");
-		$resultSet = $query->result_array();
+		$resultSet = $this->usuario->gettickets();
 	
         echo json_encode(array('data' => $resultSet));
 	}
 	
+	
 	public function getbodegas(){
-		$query = $this->db->get('INV_BODEGAS');
-		$resultSet = $query->result_array();
+		$resultSet = $this->usuario->getBodegasByEmpresa();
         return $resultSet;
     }
 	
@@ -115,13 +103,6 @@ class Ticket extends CI_Controller {
 	}
 	
 	
-	public function searchticket(){
-		
-		$resultSet = $this->usuario->checklogin('8888888888','admin');
-        var_dump(trim($resultSet->Clave));
-				
-    }
-    
 
 
 }

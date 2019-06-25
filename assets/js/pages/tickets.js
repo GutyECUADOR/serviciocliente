@@ -26,7 +26,7 @@ $(function() {
                 console.log(registerForm.serialize());
                
                 if (responseJSON.error == false) {
-                    toastr.success(responseJSON.message, 'Realizado', {timeOut: 5000});
+                    toastr.success(responseJSON.message + 'ID de registro: ' + responseJSON.nuevo_id, 'Realizado', {timeOut: 5000});
                     registerForm.trigger("reset");
                 }else if (responseJSON.error == true){
                     toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
