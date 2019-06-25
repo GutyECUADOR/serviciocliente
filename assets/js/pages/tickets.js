@@ -111,7 +111,7 @@ $(function() {
                             ${ 'Kindred' }
                         </td>
                         <td>
-                            ${ row.bodega }
+                            ${ row.nombreBodega }
                         </td>
                         <td>
                             <span class="pie"> ${ row.fecha }</span>

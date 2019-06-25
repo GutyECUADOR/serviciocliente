@@ -15,15 +15,14 @@ class Ticket extends CI_Controller {
 
 		$arraybodegas = $this->getbodegas();
 
-		if ($this->session->userdata('logged_in'))
-		{ 
-        	$this->load->view('ticketlist_view', compact('arraybodegas'));
-			
-		}else{
-			
-			$this->load->view('ticketlist_view', compact('arraybodegas'));
+		if ($this->session->userdata('logged_in')) { 
+				$this->load->view('ticketlist_view', compact('arraybodegas'));
+				
+			}else{
+				
+				$this->load->view('ticketlist_view', compact('arraybodegas'));
 		}
-		
+			
 	}
 	
 	public function nuevo(){
@@ -42,11 +41,8 @@ class Ticket extends CI_Controller {
             // Checking if everything is there
             if ($bodega && $facturaID && $titulo && $descripcion ) {
 				
-				// Loading model
-				$this->load->model('usuario');
-				
                 $data = array(
-					'codigo' => 'KAO000004',
+					'codigo' => 'KAO000001',
 					'empresa' => '008',
 					'bodega' => $bodega,
 					'facturaID' => $facturaID,
@@ -85,14 +81,16 @@ class Ticket extends CI_Controller {
 		$query = $this->db->query("
 			SELECT TOP 100
 				VEN_CAB.ID,
+				bodega.NOMBRE as nombreBodega,
 				cliente.CODIGO as codCliente,
 				cliente.RUC as ruc,
 				cliente.NOMBRE as nombreCliente,
 				ticket.*
 			FROM 
 				dbo.VEN_CAB
-			INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
-			INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+				INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
+				INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
+				INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
 			WHERE cliente.NOMBRE LIKE '$search%' or ticket.codigo LIKE '$search%'
 									");
 		$resultSet = $query->result_array();
@@ -117,12 +115,11 @@ class Ticket extends CI_Controller {
 	}
 	
 	
-	public function searchticket($search='KAO'){
-		$this->db->like('codigo', $search);
-		$this->db->or_like('titulo', $search);
-		$query = $this->db->get('tickets_serviciocliente');
-		$resultSet = $query->result_array();
-		echo json_encode($resultSet);
+	public function searchticket(){
+		
+		$resultSet = $this->usuario->checklogin('8888888888','admin');
+        var_dump(trim($resultSet->Clave));
+				
     }
     
 

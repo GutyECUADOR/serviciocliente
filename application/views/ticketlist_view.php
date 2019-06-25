@@ -49,11 +49,10 @@
                         if ($this->session->userdata('logged_in')) {  
                     ?>
                     <li class="">
-                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Inscripciones</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Tickets</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url().'registro/nuevo'?>">Nuevo registro</li>
-                            <li><a href="<?php echo base_url().'registro'?>">Lista de inscritos</li>
-                            <li><a href="<?php echo base_url().'registro/detalle'?>">Detalle inscritos</li>
+                            <li><a href="<?php echo base_url().'ticket/busquedafactura'?>">Buscar factura</li>
+                            <li><a href="<?php echo base_url().'ticket'?>">Lista de tickets</li>
                             
                         </ul>
                     </li>
@@ -72,6 +71,19 @@
                             </div>
                             <ul class="nav navbar-top-links navbar-right">
                             
+                                <li>
+                                    <span class="m-r-sm text-muted welcome-message">
+                                        <?php 
+                                         if ($this->session->userdata('logged_in')) { 
+                                            echo 'Bienvenido, '. $this->session->userdata('nombreusuario');
+                                         }else {
+                                            echo 'Bienvenido, invitado';
+                                         }
+                                        
+                                        
+                                        ?>
+                                    </span>
+                                </li>
                                 <?php
                                     if (!$this->session->userdata('logged_in')) {  
                                 ?>

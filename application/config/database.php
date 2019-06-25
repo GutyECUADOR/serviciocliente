@@ -116,3 +116,25 @@ $db['wssp'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['sbio'] = array(
+	'dsn'	=> '',
+	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=SBIOKAO',
+	'username' => 'programacion',
+	'password' => 'progra123',
+	'database' => '',
+	'dbdriver' => 'pdo',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
