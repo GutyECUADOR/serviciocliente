@@ -63,7 +63,31 @@ class Usuario extends CI_Model {
 				INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
 				INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
 			WHERE ticket.empresa ='$codeempresa' AND (cliente.NOMBRE LIKE '$search%' or ticket.codigo LIKE '$search%')
-            
+            ORDER BY ticket.codigo DESC
+            ");
+		return $query->result_array();
+	
+       
+    }
+    
+    public function getfacturas($search=''){
+        $codeempresa = $this->session->userdata('codedatabase');
+		$query = $this->empresa_db->query("
+        SELECT TOP 100
+            VEN_CAB.ID as idFactura,
+            VEN_CAB.FECHA as fechaVenta,
+            cliente.CODIGO as codCliente,
+            cliente.RUC as rucCliente,
+            cliente.NOMBRE as nombreCliente,
+            articulo.Codigo as codProducto,
+            articulo.Nombre as nombreProducto
+        FROM VEN_MOV
+        INNER JOIN dbo.VEN_CAB on VEN_CAB.ID = VEN_MOV.ID
+        INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_MOV.CLIENTE
+        INNER JOIN dbo.INV_ARTICULOS as articulo on articulo.Codigo = VEN_MOV.CODIGO
+        
+        WHERE cliente.NOMBRE LIKE '$search%' or cliente.RUC = '$search'
+        ORDER BY VEN_CAB.FECHA DESC
             ");
 		return $query->result_array();
 	

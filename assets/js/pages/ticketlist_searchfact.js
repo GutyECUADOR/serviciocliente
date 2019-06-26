@@ -10,37 +10,34 @@ $(function() {
                 let rowHTML = `
                     <tr>
                         <td>
-                            ${ app.getStatus(row.estado)  }
+                            ${ row.idFactura  }
+                        </td>
+                  
+                        <td>
+                            ${ row.fechaVenta }
                         </td>
                         <td>
-                            ${ row.codigo }
+                            ${ row.rucCliente }
                         </td>
-                        <td class="issue-info">
-                            <a href="#">
-                                 ${ row.titulo }
-                            </a>
 
-                            <small>
-                                ${ row.descripcion }
-                            </small>
-                        </td>
                         <td>
                             ${ row.nombreCliente }
                         </td>
                         <td>
-                            ${ row.nombreBodega }
+                            ${ row.codProducto }
+                           
                         </td>
                         <td>
-                            ${ row.fecha }
-                           
+                            ${ row.nombreProducto }
+                        
                         </td>
                         <td class="text-right">
                             <div class="dropdown">
                                 <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a class="btn-xs btn_confirm_asistencia" data-codigo="68"><i class="fa fa-thumbs-up"></i> Solucionado</a></li>
-                                    <li><a class="btn-xs btn_cancel_asistencia" data-codigo="68"><i class="fa fa-thumbs-down"></i> Sin solucion</a></li>
+                                    <li><a class="btn-xs btn_copy_data" data-codigo="68"><i class="fa fa-eye"></i> Copiar ID Factura</a></li>
+           
                                 </ul>
                             </div>
                         </td>
@@ -55,17 +52,9 @@ $(function() {
             });
     
         },
-        getStatus: function(statuscode){
-            if (statuscode==1) {
-                return `<span class="label label-primary">Solucionado</span>`;
-            }else{
-                return `<span class="label label-warning">Pendiente</span>`;
-            }
-            
-        },
-        searchTickets: function (input) {
+        searchFacturas: function (input) {
             $.ajax({
-                url: 'ticket/gettickets/'+input,
+                url: 'facturas/getfacturas/'+input,
                 method: 'GET',
                
                 success: function(response) {
@@ -87,11 +76,7 @@ $(function() {
         }
     }
 
-
     // ON Ready
-    app.searchTickets('');
-
-    // Events and Actions
     $('.input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
@@ -102,43 +87,8 @@ $(function() {
         todayHighlight: true
     });
 
-    let registerForm = $('#registerticket');
-    registerForm.submit(function (event) {
-        event.preventDefault();
-
-        $.ajax({
-            url: 'ticket/register',
-            method: 'POST',
-            data: registerForm.serialize(),
-
-            success: function(response) {
-                console.log(response);
-                let responseJSON = JSON.parse(response);
-                console.log(responseJSON);
-                console.log(registerForm.serialize());
-               
-                if (responseJSON.error == false) {
-                    toastr.success(responseJSON.message + 'ID de registro: ' + responseJSON.nuevo_id, 'Realizado', {timeOut: 5000});
-                    registerForm.trigger("reset");
-                }else if (responseJSON.error == true){
-                    toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
-                }
-                
-               
-               
-            },
-            error: function(error) {
-                alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
-            },
-            complete: function(data) {
-                
-            }
-
-            });
-
-    })
-
-
+    // Events and Actions
+   
     let btnBuscar = $('#btnSearch');
     btnBuscar.click(function (event) {
         event.preventDefault();
@@ -152,7 +102,7 @@ $(function() {
             return;
         }
 
-        app.searchTickets(input);
+        app.searchFacturas(input);
 
     })
 

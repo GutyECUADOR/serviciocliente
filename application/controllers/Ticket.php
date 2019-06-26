@@ -16,14 +16,13 @@ class Ticket extends CI_Controller {
 
 	public function index(){
 
-		$arraybodegas = $this->getbodegas();
-
 		if ($this->session->userdata('logged_in')) { 
+				$arraybodegas = $this->getbodegas();
 				$this->load->view('ticketlist_view', compact('arraybodegas'));
 				
 			}else{
-				
-				$this->load->view('ticketlist_view', compact('arraybodegas'));
+				$databasesArray = $this->usuario->getAllDataBaseList();
+				$this->load->view('login', compact('databasesArray'));
 		}
 			
 	}
@@ -81,7 +80,7 @@ class Ticket extends CI_Controller {
     }
 
     public function gettickets($search='KAO'){
-		$resultSet = $this->usuario->gettickets();
+		$resultSet = $this->usuario->gettickets($search);
 	
         echo json_encode(array('data' => $resultSet));
 	}

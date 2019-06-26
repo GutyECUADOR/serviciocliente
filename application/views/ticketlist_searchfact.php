@@ -111,9 +111,9 @@
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-10">
-                        <h2>Tickets - Servicio al cliente</h2>
+                        <h2>Busqueda de Facturas</h2>
                         
-                            <strong>Lista de incidencias en los locales de KAO Sport</strong>
+                            <strong>Facturas realizadas - Winfenix</strong>
                            
                     </div>
                     <div class="col-lg-2">
@@ -123,13 +123,11 @@
 
                 <div class="wrapper wrapper-content  animated fadeInRight">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <div class="ibox">
                             <div class="ibox-title">
-                                <h5>Lista de tickets</h5>
-                                <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
-                                </div>
+                                <h5>Lista de Items</h5>
+                                
 
                                 <!-- start modal -->
                                 <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
@@ -189,7 +187,7 @@
 
                                         
                                     <div class="input-group">
-                                        <input type="text" id="txtSearch" placeholder="Nombre del cliente o # de ticket..." class=" form-control">
+                                        <input type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class=" form-control">
                                         <span class="input-group-btn">
                                             <button id="btnSearch" type="button" class="btn btn-primary"> Buscar</button>
                                         </span>
@@ -199,20 +197,18 @@
                                 </div>
 
                                 <div class="">
-                                    <table class="table table-hover issue-tracker table-striped">
+                                    <table class="table table-hover table-striped">
                                         <tbody id="tbodyresults">
-                                            <thead>
-                                                <tr>
-                                                    <th>Estado</th>
-                                                    <th>Ticket</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Cliente</th>
-                                                    <th>Local</th>
-                                                    
-                                                    <th>Fecha</th>
-                                                </tr>
-                                            </thead>
-                                       
+                                        <thead>
+                                            <tr>
+                                                <th>ID Factura</th>
+                                                <th>Fecha Venta</th>
+                                                <th>RUC</th>
+                                                <th>Cliente</th>
+                                                <th>Cod Producto</th>
+                                                <th>Nombre del Producto</th>
+                                            </tr>
+                                        </thead>
                                        
                                         </tbody>
                                     </table>
@@ -259,7 +255,7 @@
    <script src="<?php echo base_url()?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
-    <script src="<?php echo base_url()?>assets/js/pages/tickets.js"></script>
+    <script src="<?php echo base_url()?>assets/js/pages/ticketlist_searchfact.js"></script>
    
 </body>
 
