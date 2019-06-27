@@ -20,10 +20,23 @@ class Facturas extends CI_Controller {
 		
 	}
 
-	public function getFacturas($search=''){
-		$resultSet = $this->usuario->getfacturas($search);
-	
-        echo json_encode(array('data' => $resultSet));
+	public function getFacturas(){
+		$search = $this->input->get('search');
+		$dbcode = $this->input->get('dbcode');
+
+		if ($search && $dbcode) {
+			$resultSet = $this->usuario->getfacturas($search, $dbcode);
+        	echo json_encode(array('ERROR' => FALSE, 'data' => $resultSet));
+		}else{
+			echo json_encode(array('ERROR' => TRUE, 'data' => '', 'info'=> $dbcode, ));
+		}
+		
+	}
+
+
+	public function getticket(){
+		$resultSet = $this->usuario->generaticket();
+        echo json_encode($resultSet);
 	}
 
 	

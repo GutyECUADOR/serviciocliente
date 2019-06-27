@@ -166,7 +166,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Descripcion del inconveniente y acuerdo</label> 
+                                                            <label>Detalle</label> 
                                                             <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Descripcion detallada del problema" required></textarea>
                                                         </div>
 

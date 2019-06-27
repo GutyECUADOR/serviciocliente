@@ -127,8 +127,7 @@
                         <div class="ibox">
                             <div class="ibox-title">
                                 <h5>Lista de Items</h5>
-                                
-
+                            
                                 <!-- start modal -->
                                 <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -142,17 +141,7 @@
                                                 </div>
                                                 <div class="modal-body">
 
-                                                        <div class="form-group">
-                                                            <label>Local / Bodega</label> 
-                                                            <select class="form-control m-b" id="bodega" name="bodega" required>
-                                                                <?php 
-                                                                    foreach($arraybodegas as $row) { 
-                                                                    echo '<option value="'.$row['CODIGO'].'">'.$row['NOMBRE'].'</option>';
-                                                                    }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                
+                                                        
                                                         <div class="form-group">
                                                             <label>ID Factura</label> 
                                                             <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required>
@@ -164,8 +153,13 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Descripcion del inconveniente y acuerdo</label> 
-                                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Descripcion detallada del problema" required></textarea>
+                                                            <label>Problema</label> 
+                                                            <textarea class="form-control" id="txt_problema" name="txt_problema" rows="3" placeholder="Descripcion detallada del problema" required></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Solucion Acordada</label> 
+                                                            <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Descripcion detallada del problema" required></textarea>
                                                         </div>
 
 
@@ -184,14 +178,21 @@
                             <div class="ibox-content">
 
                                 <div class="m-b-lg">
-
-                                        
+                     
                                     <div class="input-group">
-                                        <input type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class=" form-control">
+                                        <input style="width: 70% !important;" type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class="form-control">
+                                        <select style="width: 30% !important;" id="selectEmpresa" class="form-control">
+                                            <option value='002'>Quito (Kindred)</option>
+                                            <option value='006'>Guayaquil (Comerc. Kinsman)</option>
+                                            <option value='008'>Modelo</option>
+                                            <option value='009'>Modelo IMPKAO</option>
+                                            
+                                        </select>
                                         <span class="input-group-btn">
                                             <button id="btnSearch" type="button" class="btn btn-primary"> Buscar</button>
                                         </span>
                                     </div>
+
                                     
 
                                 </div>
@@ -205,6 +206,7 @@
                                                 <th>Fecha Venta</th>
                                                 <th>RUC</th>
                                                 <th>Cliente</th>
+                                                <th>Local</th>
                                                 <th>Cod Producto</th>
                                                 <th>Nombre del Producto</th>
                                             </tr>

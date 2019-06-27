@@ -47,7 +47,7 @@ class Usuario extends CI_Model {
 		return $resultSet;
     }
 
-    public function gettickets($search='KAO'){
+    public function gettickets($search='KAO') {
         $codeempresa = $this->session->userdata('codedatabase');
 		$query = $this->empresa_db->query("
 			SELECT TOP 100
@@ -70,8 +70,8 @@ class Usuario extends CI_Model {
        
     }
     
-    public function getfacturas($search=''){
-        $codeempresa = $this->session->userdata('codedatabase');
+    public function getfacturas($search='', $db_code='008') {
+        $this->empresa_db = $this->load->database($db_code, TRUE);
 		$query = $this->empresa_db->query("
         SELECT TOP 100
             VEN_CAB.ID as idFactura,
@@ -80,11 +80,13 @@ class Usuario extends CI_Model {
             cliente.RUC as rucCliente,
             cliente.NOMBRE as nombreCliente,
             articulo.Codigo as codProducto,
-            articulo.Nombre as nombreProducto
+            articulo.Nombre as nombreProducto,
+            bodega.NOMBRE as nombreBodega
         FROM VEN_MOV
         INNER JOIN dbo.VEN_CAB on VEN_CAB.ID = VEN_MOV.ID
         INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_MOV.CLIENTE
         INNER JOIN dbo.INV_ARTICULOS as articulo on articulo.Codigo = VEN_MOV.CODIGO
+        INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
         
         WHERE cliente.NOMBRE LIKE '$search%' or cliente.RUC = '$search'
         ORDER BY VEN_CAB.FECHA DESC
@@ -94,5 +96,9 @@ class Usuario extends CI_Model {
        
 	}
 
+    public function generaticket() {
+        $query = $this->wssp_db->query("exec sp_genera_ticket 'KAO'");
+        return $query->result();
+    }
 
 }

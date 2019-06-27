@@ -14,7 +14,7 @@ $(function() {
                         </td>
                   
                         <td>
-                            ${ row.fechaVenta }
+                            ${ row.fechaVenta.slice(0,10) }
                         </td>
                         <td>
                             ${ row.rucCliente }
@@ -24,9 +24,12 @@ $(function() {
                             ${ row.nombreCliente }
                         </td>
                         <td>
+                            ${ row.nombreBodega }
+                         </td>
+                        <td>
                             ${ row.codProducto }
-                           
                         </td>
+                       
                         <td>
                             ${ row.nombreProducto }
                         
@@ -36,7 +39,7 @@ $(function() {
                                 <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a class="btn-xs btn_copy_data" data-codigo="68"><i class="fa fa-eye"></i> Copiar ID Factura</a></li>
+                                    <li><a class="btn-xs btn_generarticketByID" data-codigo="${ row.idFactura  }"><i class="fa fa-eye"></i> Crear ticket a la factura</a></li>
            
                                 </ul>
                             </div>
@@ -52,18 +55,25 @@ $(function() {
             });
     
         },
-        searchFacturas: function (input) {
+        searchFacturas: function (search, dbcode) {
             $.ajax({
-                url: 'facturas/getfacturas/'+input,
+                url: 'facturas/getfacturas',
                 method: 'GET',
+                data: {search: search, dbcode: dbcode},
                
                 success: function(response) {
                     console.log(response);
                     let responseJSON = JSON.parse(response);
                     console.log(responseJSON);
                    
-                    toastr.success('Busqueda finalizada', 'Realizado', {timeOut: 2000});
-                    app.showResults(responseJSON.data);
+                    if (!responseJSON.ERROR) {
+                        toastr.success('Busqueda finalizada', 'Realizado', {timeOut: 2000});
+                        app.showResults(responseJSON.data);
+                    }else{
+                        toastr.error('No se pudo completar la busqueda', 'Error', {timeOut: 2000});
+                    }
+
+                    
                 },
                 error: function(error) {
                     alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
@@ -94,6 +104,7 @@ $(function() {
         event.preventDefault();
 
         let input = $('#txtSearch').val();
+        let dbcode = $('#selectEmpresa').val();
         console.log(input)
         
 
@@ -102,7 +113,19 @@ $(function() {
             return;
         }
 
-        app.searchFacturas(input);
+        app.searchFacturas(input, dbcode);
+
+    })
+
+
+    
+    $('#tbodyresults').on("click", ".btn_generarticketByID", function(event) {
+        event.preventDefault();
+        let ID = $(this).data('codigo');
+        console.log(ID);
+        $('#modal_new_ticket').modal('show');
+        $('#facturaID').val(ID);
+        
 
     })
 
