@@ -27,31 +27,31 @@ class Ticket extends CI_Controller {
 			
 	}
 	
-	public function nuevo(){
-		$this->load->view('nuevainscripcion');
-	}
 
-	
 	public function register() {
 		
 		if (!empty($_POST)) {
+			
+			$empresa = strtoupper($this->input->post('empresa'));
             $bodega = strtoupper($this->input->post('bodega'));
 			$facturaID = strtoupper($this->input->post('facturaID'));
 			$titulo = $this->input->post('titulo');
-            $descripcion = $this->input->post('descripcion');
+			$problema = $this->input->post('txt_problema');
+			$solucion = $this->input->post('txt_solucion');
 		
             // Checking if everything is there
-            if ($bodega && $facturaID && $titulo && $descripcion ) {
+            if ($bodega && $facturaID && $titulo && $problema && $solucion ) {
 				
                 $data = array(
 					'codigo' => 'KAO000001',
-					'empresa' => $this->session->userdata('codedatabase'),
+					'empresa' => $empresa,
 					'bodega' => $bodega,
 					'facturaID' => $facturaID,
-					'encargadoID' => '1600505505',
+					'encargadoID' => $this->session->userdata('cedula'),
 					'fecha' => date('Ymd'),
 					'titulo' => $titulo,
-					'descripcion' => $descripcion,
+					'problema' => $problema,
+					'solucion' => $solucion,
 					'estado' => 0
                 );
                 
@@ -59,7 +59,7 @@ class Ticket extends CI_Controller {
 					
 					$response = array(
 						'error'     => FALSE, 
-						'message'     => 'Registro exitoso', 
+						'message'     => 'Registro exitoso. ', 
 						'nuevo_id'  => $ID
 						);
               
@@ -91,7 +91,7 @@ class Ticket extends CI_Controller {
         return $resultSet;
     }
 	
-	public function updateasistencia($status=0){
+	public function chengeStatusTicket($status=0){
 		$id = $this->input->get('id');
 		$this->db->where('id', $id);
 		$this->db->update('inscripciones', array('asistencia'=> $status));

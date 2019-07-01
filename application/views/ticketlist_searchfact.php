@@ -127,10 +127,13 @@
                         <div class="ibox">
                             <div class="ibox-title">
                                 <h5>Lista de Items</h5>
+                                <div class="ibox-tools">
+                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
+                                </div>
                             
                                 <!-- start modal -->
                                 <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                     <div class="modal-content animated fadeIn">
                                             <form id="registerticket" action="#">
                                                 <div class="modal-header">
@@ -141,10 +144,63 @@
                                                 </div>
                                                 <div class="modal-body">
 
+                                                    <div class="col-lg-12">
+                                                        <div class="ibox float-e-margins">
+                                                            <div class="ibox-title">
+                                                                <h5>Factura # <small id="ID_facura" class="m-l-sm"></small></h5>
+                                                                
+                                                                <div class="ibox-tools">
+                                                                    <a class="collapse-link">
+                                                                        <i class="fa fa-chevron-up"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ibox-content" style="display: block;">
+                                                                
+                                                            <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
+   
+                                                                <li class="info-element">
+                                                                    <p><strong ># Documento: </strong><span id="num_factura"><span> </p>
+                                                                    <p><strong >Fecha: </strong><span id="fecha_factura"><span> </p>
+                                                                    <p><strong >Bodega: </strong><span id="bodega_factura"><span> </p>
+                                                                    <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
+                                                                    <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
+                                                                    <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
+                                                                   
+                                                                </li>
+                                                                
+                                                            </ul>
+
+                                                                
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Codigo</th>
+                                                                            <th>Producto</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Precio</th>
+                                                                            <th>Descuento</th>
+                                                                            <th>IVA</th>
+                                                                            <th>Precio Total</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="table_VENMOV">
+
+                                                                        <!-- Render items aqui-->
+                                                                   
+                                                                    </tbody>
+                                                                </table>
+                                                                
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
                                                         
+
                                                         <div class="form-group">
                                                             <label>ID Factura</label> 
-                                                            <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required>
+                                                            <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required readonly>
                                                         </div>
 
                                                         <div class="form-group">
@@ -158,7 +214,7 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Solucion Acordada</label> 
+                                                            <label>Solucion</label> 
                                                             <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Descripcion detallada del problema" required></textarea>
                                                         </div>
 

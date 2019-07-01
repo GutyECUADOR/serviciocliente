@@ -10,8 +10,9 @@ class Facturas extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('logged_in')) { 
-			$this->load->view('ticketlist_searchfact');
+		if ($this->session->userdata('logged_in')) {
+			$arraybodegas = $this->getbodegas();
+			$this->load->view('ticketlist_searchfact', compact('arraybodegas'));
 			
 		}else{
 			$databasesArray = $this->usuario->getAllDataBaseList();
@@ -28,16 +29,45 @@ class Facturas extends CI_Controller {
 			$resultSet = $this->usuario->getfacturas($search, $dbcode);
         	echo json_encode(array('ERROR' => FALSE, 'data' => $resultSet));
 		}else{
-			echo json_encode(array('ERROR' => TRUE, 'data' => '', 'info'=> $dbcode, ));
+			echo json_encode(array('ERROR' => TRUE, 'data' => ''));
 		}
 		
 	}
+
+	public function getFactura(){
+		$VEN_CAB = $this->input->get('ID');
+		$dbcode = $this->input->get('dbcode');
+
+		if ($VEN_CAB && $dbcode) {
+			
+			if ($resultSetCAB = $this->usuario->getfacturaByID($VEN_CAB, $dbcode)) {
+				$resultSetMOV = $this->usuario->getfacturaMOVByID($VEN_CAB, $dbcode);
+				echo json_encode(array('ERROR' => FALSE, 
+									'documento' => $resultSetCAB,
+									'movimientos' => $resultSetMOV
+									));
+			}else {
+				echo json_encode(array('ERROR' => TRUE, 'documento' => '', 'message'=>'No se pudo comlpetar la operacion'));
+			}
+        	
+		}else{
+			echo json_encode(array('ERROR' => TRUE, 'documento' => '', 'message'=>'Codigo o ID de factura no valido'));
+		}
+		
+	}
+
+	public function getbodegas(){
+		$resultSet = $this->usuario->getBodegasByEmpresa();
+        return $resultSet;
+    }
 
 
 	public function getticket(){
 		$resultSet = $this->usuario->generaticket();
         echo json_encode($resultSet);
 	}
+
+	
 
 	
 }

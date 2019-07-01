@@ -70,6 +70,51 @@ class Usuario extends CI_Model {
        
     }
     
+    public function getfacturaByID($ID='', $db_code='008') {
+        $this->empresa_db = $this->load->database($db_code, TRUE);
+		$query = $this->empresa_db->query("
+        SELECT 
+            VEN_CAB.ID,
+            VEN_CAB.NUMERO,
+            VEN_CAB.FECHA,
+            VEN_CAB.CLIENTE as codCliente,
+            cliente.RUC as RUCCliente,
+            cliente.NOMBRE as nombreCliente,
+            VEN_CAB.BODEGA as codBodega,
+            bodega.NOMBRE as nombreBodega,
+            VEN_CAB.TOTAL as totalFactura
+        
+        FROM 
+            dbo.VEN_CAB 
+            INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
+            INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
+        
+        WHERE 
+            VEN_CAB.ID = '$ID'
+            ");
+		return $query->row();
+	
+       
+	}
+
+    public function getfacturaMOVByID($ID='', $db_code='008') {
+        $this->empresa_db = $this->load->database($db_code, TRUE);
+		$query = $this->empresa_db->query("
+        SELECT
+            producto.Nombre,
+            VEN_MOV.*
+
+        FROM 
+            dbo.VEN_MOV
+            INNER JOIN dbo.INV_ARTICULOS as producto on producto.Codigo = VEN_MOV.CODIGO
+        WHERE 
+            ID='$ID'
+            ");
+		return $query->result();
+	
+       
+	}
+
     public function getfacturas($search='', $db_code='008') {
         $this->empresa_db = $this->load->database($db_code, TRUE);
 		$query = $this->empresa_db->query("
@@ -98,7 +143,7 @@ class Usuario extends CI_Model {
 
     public function generaticket() {
         $query = $this->wssp_db->query("exec sp_genera_ticket 'KAO'");
-        return $query->result();
+        return $query->row();
     }
 
 }
