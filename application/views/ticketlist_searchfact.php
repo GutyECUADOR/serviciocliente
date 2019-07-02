@@ -75,7 +75,7 @@
                                     <span class="m-r-sm text-muted welcome-message">
                                         <?php 
                                          if ($this->session->userdata('logged_in')) { 
-                                            echo 'Bienvenido, '. $this->session->userdata('nombreusuario');
+                                            echo 'Bienvenido, '. $this->session->userdata('nombreusuario') .'('. $this->session->userdata('user_role').')' ;
                                          }else {
                                             echo 'Bienvenido, invitado';
                                          }
@@ -135,7 +135,7 @@
                                 <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                     <div class="modal-content animated fadeIn">
-                                            <form id="registerticket" action="#">
+                                            <form id="registerticket" action="#" autocomplete="off">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                     <i class="fa fa-user modal-icon"></i>
@@ -148,11 +148,14 @@
                                                         <div class="ibox float-e-margins">
                                                             <div class="ibox-title">
                                                                 <h5>Factura # <small id="ID_facura" class="m-l-sm"></small></h5>
-                                                                
+                                                                <div id="div_checkticket">
+                                                                    
+                                                                </div>
                                                                 <div class="ibox-tools">
                                                                     <a class="collapse-link">
                                                                         <i class="fa fa-chevron-up"></i>
                                                                     </a>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="ibox-content" style="display: block;">
@@ -163,6 +166,7 @@
                                                                     <p><strong ># Documento: </strong><span id="num_factura"><span> </p>
                                                                     <p><strong >Fecha: </strong><span id="fecha_factura"><span> </p>
                                                                     <p><strong >Bodega: </strong><span id="bodega_factura"><span> </p>
+                                                                    <p><strong >Vendedor: </strong><span id="vendedor_factura"><span> </p>
                                                                     <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
                                                                     <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
                                                                     <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
@@ -196,26 +200,29 @@
                                                         </div>
                                                     </div>
 
-                                                        
-
                                                         <div class="form-group">
                                                             <label>ID Factura</label> 
                                                             <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required readonly>
                                                         </div>
 
                                                         <div class="form-group">
+                                                            <label>Referencia</label> 
+                                                            <input type="text" id="referencia" name="referencia" placeholder="Link del chat en red social, Llamada telefonica, etc" class="form-control" required>
+                                                        </div>
+
+                                                        <div class="form-group">
                                                             <label>Titulo</label> 
-                                                            <input type="text" id="titulo" name="titulo" placeholder="Descripcion rapida del problema" class="form-control" required>
+                                                            <input type="text" id="titulo" name="titulo" placeholder="Descripcion rapida del problema" class="form-control" maxlength="70" required>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Problema</label> 
-                                                            <textarea class="form-control" id="txt_problema" name="txt_problema" rows="3" placeholder="Descripcion detallada del problema" required></textarea>
+                                                            <textarea class="form-control" id="txt_problema" name="txt_problema" rows="3" placeholder="Descripcion detallada del problema" maxlength="200" required></textarea>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Solucion</label> 
-                                                            <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Descripcion detallada del problema" required></textarea>
+                                                            <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Dejar en blanco si no se ha dado solucion de momento." maxlength="200"></textarea>
                                                         </div>
 
 

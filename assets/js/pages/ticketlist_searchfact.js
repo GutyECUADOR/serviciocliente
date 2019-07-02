@@ -61,10 +61,13 @@ $(function() {
             $('#num_factura').html(facturaData.NUMERO);
             $('#fecha_factura').html(facturaData.FECHA);
             $('#bodega_factura_hidden').val(facturaData.codBodega);
+            $('#vendedor_factura').html('('+facturaData.codVendedor +') '+ facturaData.nombreVendedor);
             $('#bodega_factura').html(facturaData.nombreBodega);
             $('#ruc_factura').html(facturaData.RUCCliente);
             $('#nombreCliente_factura').html(facturaData.nombreCliente);
-           
+            $('#div_checkticket').html(app.checkExistTicket(facturaData.ticket));
+
+
             $('#table_VENMOV').html('');
            
             movimientos.forEach(row => {
@@ -156,6 +159,13 @@ $(function() {
                 }
     
             });
+        },
+        checkExistTicket: function (ticketCODE) {
+            if (ticketCODE) {
+                return  `<span class="label label-warning">Atencion, se ha detectado que ya existe un ticket a esta factura: <strong>${ ticketCODE }</strong></span> `;
+            }else if( ticketCODE == null){
+                return '';
+            }
         }
     }
 

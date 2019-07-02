@@ -35,20 +35,24 @@ class Ticket extends CI_Controller {
 			$empresa = strtoupper($this->input->post('empresa'));
             $bodega = strtoupper($this->input->post('bodega'));
 			$facturaID = strtoupper($this->input->post('facturaID'));
+			$referencia = $this->input->post('referencia');
 			$titulo = $this->input->post('titulo');
 			$problema = $this->input->post('txt_problema');
 			$solucion = $this->input->post('txt_solucion');
 		
             // Checking if everything is there
-            if ($bodega && $facturaID && $titulo && $problema && $solucion ) {
+            if ($bodega && $facturaID && $referencia &&  $titulo && $problema ) {
+
+				$ticket = $this->newticket();
 				
                 $data = array(
-					'codigo' => 'KAO000001',
+					'codigo' => $ticket,
 					'empresa' => $empresa,
 					'bodega' => $bodega,
 					'facturaID' => $facturaID,
 					'encargadoID' => $this->session->userdata('cedula'),
 					'fecha' => date('Ymd'),
+					'referencia' => $referencia,
 					'titulo' => $titulo,
 					'problema' => $problema,
 					'solucion' => $solucion,
@@ -84,6 +88,11 @@ class Ticket extends CI_Controller {
 	
         echo json_encode(array('data' => $resultSet));
 	}
+
+	public function newticket(){
+		$resultSet = $this->usuario->generaticket();
+		return $resultSet;
+	}
 	
 	
 	public function getbodegas(){
@@ -92,13 +101,11 @@ class Ticket extends CI_Controller {
     }
 	
 	public function chengeStatusTicket($status=0){
-		$id = $this->input->get('id');
-		$this->db->where('id', $id);
-		$this->db->update('inscripciones', array('asistencia'=> $status));
+
+		$resultSet = $this->usuario->chengeStatusTicket($status);
 		
-		$updated_status = $this->db->affected_rows();
-       
-		echo json_encode($updated_status);
+		echo json_encode($resultSet);
+			
 	}
 	
 	

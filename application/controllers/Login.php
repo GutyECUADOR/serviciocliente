@@ -31,7 +31,7 @@ class Login extends CI_Controller {
 					'codedatabase' => $codedatabase,
 					'cedula' => $dataDB->Cedula,
 					'nombreusuario'  => $dataDB->Nombre . $dataDB->Apellido,
-					'role'     => $dataDB->CodDpto,
+					'user_role'     => trim($dataDB->CodDpto),
 					'logged_in' => TRUE
 				);
 			

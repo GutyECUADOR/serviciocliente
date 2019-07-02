@@ -75,7 +75,7 @@
                                     <span class="m-r-sm text-muted welcome-message">
                                         <?php 
                                          if ($this->session->userdata('logged_in')) { 
-                                            echo 'Bienvenido, '. $this->session->userdata('nombreusuario');
+                                            echo 'Bienvenido, '. $this->session->userdata('nombreusuario') .'('. $this->session->userdata('user_role').')' ;
                                          }else {
                                             echo 'Bienvenido, invitado';
                                          }
@@ -128,59 +128,32 @@
                             <div class="ibox-title">
                                 <h5>Lista de tickets</h5>
                                 <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
                                 </div>
 
-                                <!-- start modal -->
-                                <div class="modal inmodal" id="modal_new_ticket" tabindex="-1" role="dialog" aria-hidden="true">
+                                 <!-- start modal -->
+                                 <div class="modal inmodal" id="modal_add_solucion" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content animated fadeIn">
-                                            <form id="registerticket" action="#">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                    <i class="fa fa-user modal-icon"></i>
-                                                    <h4 class="modal-title">Nuevo Ticket</h4>
-                                                    <small class="font-bold">Registe a continuación la información, sobre factura e inconveniente del producto.</small>
-                                                </div>
+                                            <form id="updateticket" action="#" autocomplete="off">
+                                                
                                                 <div class="modal-body">
 
-                                                        <div class="form-group">
-                                                            <label>Local / Bodega</label> 
-                                                            <select class="form-control m-b" id="bodega" name="bodega" required>
-                                                                <?php 
-                                                                    foreach($arraybodegas as $row) { 
-                                                                    echo '<option value="'.$row['CODIGO'].'">'.$row['NOMBRE'].'</option>';
-                                                                    }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                
-                                                        <div class="form-group">
-                                                            <label>ID Factura</label> 
-                                                            <input type="text" id="facturaID" name="facturaID" placeholder="992014XXX00000XXX" class="form-control" required>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label>Titulo</label> 
-                                                            <input type="text" id="titulo" name="titulo" placeholder="Descripcion rapida del problema" class="form-control" required>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label>Detalle</label> 
-                                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Descripcion detallada del problema" required></textarea>
-                                                        </div>
+                                                    <div class="form-group">
+                                                        <label>Solucion</label> 
+                                                        <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Solucion que se ha dado al cliente." maxlength="200" required></textarea>
+                                                    </div>
 
 
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                                                    <button type="submit" class="btn btn-primary">Registrar ticket</button>
+                                                    <button type="submit" class="btn btn-primary">Actualizar ticket</button>
                                                 </div>
                                             </form>   
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end modal -->
+                                <!-- end modal -->        
 
                             </div>
                             <div class="ibox-content">
@@ -198,8 +171,9 @@
 
                                 </div>
 
-                                <div class="">
-                                    <table class="table table-hover issue-tracker table-striped">
+                                <div class="table-responsive" style="min-height: 500px;">
+                                    <table id="tabla_tickets" class="table table-hover issue-tracker table-striped">
+                                        
                                         <tbody id="tbodyresults">
                                             <thead>
                                                 <tr>

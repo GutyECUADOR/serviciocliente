@@ -10,7 +10,7 @@ $(function() {
                 let rowHTML = `
                     <tr>
                         <td>
-                            ${ app.getStatus(row.estado)  }
+                            ${ app.getStatus(row.estado, row.solucion)  }
                         </td>
                         <td>
                             ${ row.codigo }
@@ -21,7 +21,7 @@ $(function() {
                             </a>
 
                             <small>
-                                ${ row.descripcion }
+                                ${ row.problema }
                             </small>
                         </td>
                         <td>
@@ -39,8 +39,9 @@ $(function() {
                                 <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a class="btn-xs btn_confirm_asistencia" data-codigo="68"><i class="fa fa-thumbs-up"></i> Solucionado</a></li>
-                                    <li><a class="btn-xs btn_cancel_asistencia" data-codigo="68"><i class="fa fa-thumbs-down"></i> Sin solucion</a></li>
+                                <li><a class="btn-xs btn_add_solucion" data-codigo="${ row.codigo }"><i class="fa fa-check"></i> Ver detalle</a></li>
+                                    <li><a class="btn-xs btn_finalizar_ticket" data-codigo="${ row.codigo }"><i class="fa fa-thumbs-up"></i> Finalizar</a></li>
+                                  
                                 </ul>
                             </div>
                         </td>
@@ -55,9 +56,13 @@ $(function() {
             });
     
         },
-        getStatus: function(statuscode){
-            if (statuscode==1) {
-                return `<span class="label label-primary">Solucionado</span>`;
+        getStatus: function(statuscode, solucion){
+            if (statuscode==1 && solucion.length >1) {
+                return `<span class="label label-primary">Finalizado & Solucionado</span>`;
+            }else if(statuscode==0 && solucion.length >1){
+                return `<span class="label label-success">Solventado en local</span>`;
+            } else if(statuscode==1 && solucion.length <= 0){
+                return `<span class="label label-danger">Sin solucion</span>`;
             }else{
                 return `<span class="label label-warning">Pendiente</span>`;
             }
@@ -156,6 +161,50 @@ $(function() {
 
     })
 
+    $('#tbodyresults').on("click", ".btn_add_solucion", function(event) {
+        event.preventDefault();
+        let ID = $(this).data('codigo');
+        let dbcode = $('#selectEmpresa').val();
+        console.log(ID);
+        $('#modal_add_solucion').modal('show');
+       /*  $('#facturaID').val(ID);
+        app.searchFacturaByID(ID, dbcode); */
+
+    })
+
+
+    $("#tabla_tickets").on('click', '.btn_finalizar_ticket', function(e) {
+        let codigo = $(this).data("codigo");
+        console.log(codigo);
+ 
+         $.ajax({
+             url: 'ticket/chengestatusticket/1',
+             method: 'GET',
+             data: { id: codigo},
+             
+             success: function(response) {
+                console.log(response);
+                let responseJSON = JSON.parse(response);
+                    if (responseJSON.error == false) {
+                        toastr.success(responseJSON.message, 'Realizado', {timeOut: 5000});
+                    
+                    }else if (responseJSON.error == true){
+                        toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
+                    }
+
+                
+             },
+             error: function(error) {
+                 console('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
+                 toastr.error('No se pudo realizar.', 'Upss', {timeOut: 2000})
+             },
+             complete: function(data) {
+                app.searchTickets('');
+             }
+ 
+         });
+        
+     })
     
 
 });

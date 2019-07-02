@@ -73,23 +73,28 @@ class Usuario extends CI_Model {
     public function getfacturaByID($ID='', $db_code='008') {
         $this->empresa_db = $this->load->database($db_code, TRUE);
 		$query = $this->empresa_db->query("
-        SELECT 
+        SELECT TOP 1
             VEN_CAB.ID,
             VEN_CAB.NUMERO,
             VEN_CAB.FECHA,
+            VEN_CAB.CODVEN as codVendedor,
+            vendedor.NOMBRE as nombreVendedor,
             VEN_CAB.CLIENTE as codCliente,
             cliente.RUC as RUCCliente,
             cliente.NOMBRE as nombreCliente,
             VEN_CAB.BODEGA as codBodega,
             bodega.NOMBRE as nombreBodega,
-            VEN_CAB.TOTAL as totalFactura
-        
+            VEN_CAB.TOTAL as totalFactura,
+            ticket.codigo as ticket
+                        
         FROM 
             dbo.VEN_CAB 
             INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
             INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
-        
-        WHERE 
+            INNER JOIN dbo.COB_VENDEDORES as vendedor on vendedor.CODIGO = VEN_CAB.CODVEN
+            LEFT JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+                        
+        WHERE
             VEN_CAB.ID = '$ID'
             ");
 		return $query->row();
@@ -142,8 +147,31 @@ class Usuario extends CI_Model {
 	}
 
     public function generaticket() {
-        $query = $this->wssp_db->query("exec sp_genera_ticket 'KAO'");
-        return $query->row();
+        $query = $this->wssp_db->query("SELECT 'KAO'+RIGHT('000000'+ISNULL(CONVERT (Varchar , (SELECT COUNT(*)+1 FROM dbo.tickets_serviciocliente)),''),6) as ticket");
+        $resultset = $query->row();
+        return $resultset->ticket;
     }
+
+    public function chengeStatusTicket($status=0){
+
+		if ($this->session->userdata('user_role')=='ASI') { 
+			$id = $this->input->get('id');
+			$this->wssp_db->where('codigo', $id);
+			$this->wssp_db->update('tickets_serviciocliente', array('estado'=> $status));
+			
+			$affected_rows = $this->wssp_db->affected_rows();
+		   
+            return $response = array('error'=> FALSE,
+							'message'=> 'Se ha actualizado '.$affected_rows. ' registro(s) correctamente', 
+							'affected_rows' => $affected_rows);	
+		}else{
+            return $response = array('error'=> TRUE,
+							'message'=> 'No posee suficientes permisos para realizar esta accion', 
+                            'affected_rows' => 0,
+                            'role' => $this->session->userdata('user_role')
+                        );	
+        }
+		
+	}
 
 }
