@@ -154,7 +154,7 @@ class Usuario extends CI_Model {
 
     public function chengeStatusTicket($status=0){
 
-		if ($this->session->userdata('user_role')=='ASI') { 
+		if ($this->session->userdata('user_role')=='SVC' || $this->session->userdata('user_role')=='ADM') { 
 			$id = $this->input->get('id');
 			$this->wssp_db->where('codigo', $id);
 			$this->wssp_db->update('tickets_serviciocliente', array('estado'=> $status));

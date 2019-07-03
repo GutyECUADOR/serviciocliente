@@ -236,7 +236,7 @@ $(function() {
                 alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
             },
             complete: function(data) {
-                
+                $('#modal_new_ticket').modal('hide');
             }
 
             });

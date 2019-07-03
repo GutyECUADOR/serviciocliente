@@ -207,7 +207,7 @@
 
                                                         <div class="form-group">
                                                             <label>Referencia</label> 
-                                                            <input type="text" id="referencia" name="referencia" placeholder="Link del chat en red social, Llamada telefonica, etc" class="form-control" required>
+                                                            <input type="text" id="referencia" name="referencia" placeholder="Link del chat en red social, Llamada telefonica, etc" maxlength="150" class="form-control" required>
                                                         </div>
 
                                                         <div class="form-group">

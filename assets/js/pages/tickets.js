@@ -177,12 +177,13 @@ $(function() {
         let codigo = $(this).data("codigo");
         console.log(codigo);
  
-         $.ajax({
-             url: 'ticket/chengestatusticket/1',
-             method: 'GET',
-             data: { id: codigo},
-             
-             success: function(response) {
+        if (confirm("Confirme finalizar el ticket, esto enviara una notificacion al cliente.")) {
+            $.ajax({
+                url: 'ticket/chengestatusticket/1',
+                method: 'GET',
+                data: { id: codigo},
+                
+                success: function(response) {
                 console.log(response);
                 let responseJSON = JSON.parse(response);
                     if (responseJSON.error == false) {
@@ -193,16 +194,18 @@ $(function() {
                     }
 
                 
-             },
-             error: function(error) {
-                 console('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
-                 toastr.error('No se pudo realizar.', 'Upss', {timeOut: 2000})
-             },
-             complete: function(data) {
+                },
+                error: function(error) {
+                    console('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
+                    toastr.error('No se pudo realizar.', 'Upss', {timeOut: 2000})
+                },
+                complete: function(data) {
                 app.searchTickets('');
-             }
- 
-         });
+                }
+
+            });
+        }
+
         
      })
     
