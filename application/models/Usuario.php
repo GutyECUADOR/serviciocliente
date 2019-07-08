@@ -25,6 +25,12 @@ class Usuario extends CI_Model {
         return $this->wssp_db->insert_id();
     }
 
+    public function updateTicket($data, $codigo) {
+        $this->wssp_db->where('codigo', $codigo);
+        $this->wssp_db->update('tickets_serviciocliente', $data);
+        return $this->wssp_db->affected_rows();
+    }
+
     public function checklogin($usuario, $password) {
         
         $this->sbio_db->select('Codigo, Nombre, Apellido, Cedula, CodDpto, Clave');
@@ -70,7 +76,7 @@ class Usuario extends CI_Model {
        
     }
     
-    public function getfacturaByID($ID='', $db_code='008') {
+    public function getfacturaByID($ID, $db_code='008') {
         $this->empresa_db = $this->load->database($db_code, TRUE);
 		$query = $this->empresa_db->query("
         SELECT TOP 1
@@ -100,6 +106,40 @@ class Usuario extends CI_Model {
 		return $query->row();
 	
        
+    }
+    
+    public function getTicketByCodigo($codigo) {
+        $codeempresa = $this->session->userdata('codedatabase'); //'008'; //
+        $this->empresa_db = $this->load->database($codeempresa, TRUE);
+        $query = $this->empresa_db->query("
+            SELECT TOP 1
+                VEN_CAB.ID,
+                VEN_CAB.NUMERO,
+                VEN_CAB.FECHA,
+                VEN_CAB.CODVEN as codVendedor,
+                vendedor.NOMBRE as nombreVendedor,
+                VEN_CAB.CLIENTE as codCliente,
+                cliente.RUC as RUCCliente,
+                cliente.NOMBRE as nombreCliente,
+                cliente.EMAIL as emailCliente,
+                VEN_CAB.BODEGA as codBodega,
+                bodega.NOMBRE as nombreBodega,
+                VEN_CAB.TOTAL as totalFactura,
+                ticket.codigo as ticket,
+                ticket.*
+                                    
+            FROM 
+                dbo.VEN_CAB 
+                INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
+                INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
+                INNER JOIN dbo.COB_VENDEDORES as vendedor on vendedor.CODIGO = VEN_CAB.CODVEN
+                INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+                                    
+            WHERE
+                ticket.codigo = '$codigo'
+            ");
+    
+		return $query->row();
 	}
 
     public function getfacturaMOVByID($ID='', $db_code='008') {

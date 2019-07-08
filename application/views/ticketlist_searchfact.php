@@ -128,7 +128,7 @@
                             <div class="ibox-title">
                                 <h5>Lista de Items</h5>
                                 <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
+                                   <!--  <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a> -->
                                 </div>
                             
                                 <!-- start modal -->
@@ -160,20 +160,20 @@
                                                             </div>
                                                             <div class="ibox-content" style="display: block;">
                                                                 
-                                                            <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
-   
-                                                                <li class="info-element">
-                                                                    <p><strong ># Documento: </strong><span id="num_factura"><span> </p>
-                                                                    <p><strong >Fecha: </strong><span id="fecha_factura"><span> </p>
-                                                                    <p><strong >Bodega: </strong><span id="bodega_factura"><span> </p>
-                                                                    <p><strong >Vendedor: </strong><span id="vendedor_factura"><span> </p>
-                                                                    <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
-                                                                    <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
-                                                                    <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
-                                                                   
-                                                                </li>
-                                                                
-                                                            </ul>
+                                                                <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
+    
+                                                                    <li class="info-element">
+                                                                        <p><strong ># Documento: </strong><span id="num_factura"><span> </p>
+                                                                        <p><strong >Fecha: </strong><span id="fecha_factura"><span> </p>
+                                                                        <p><strong >Bodega: </strong><span id="bodega_factura"><span> </p>
+                                                                        <p><strong >Vendedor: </strong><span id="vendedor_factura"><span> </p>
+                                                                        <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
+                                                                        <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
+                                                                        <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
+                                                                    
+                                                                    </li>
+                                                                    
+                                                                </ul>
 
                                                                 
                                                                 <table class="table">
@@ -221,8 +221,18 @@
                                                         </div>
 
                                                         <div class="form-group">
+                                                            <label>Procedimiento</label> 
+                                                            <textarea class="form-control" id="txt_procedimiento" name="txt_procedimiento" rows="3" placeholder="Indique como se procederá a solucionar" maxlength="200" required></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
                                                             <label>Solucion</label> 
                                                             <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Dejar en blanco si no se ha dado solucion de momento." maxlength="200"></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Autorizado por</label> 
+                                                            <input type="text" class="form-control" id="txt_autorizado" name="txt_autorizado" rows="3" placeholder="Quien autoriza el proceso y solucion." maxlength="50" required>
                                                         </div>
 
 

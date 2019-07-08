@@ -62,12 +62,5 @@ class Facturas extends CI_Controller {
     }
 
 
-	public function getticket(){
-		$resultSet = $this->usuario->generaticket();
-        echo json_encode($resultSet);
-	}
-
-	
-
 	
 }

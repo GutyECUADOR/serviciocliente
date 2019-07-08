@@ -136,11 +136,48 @@
                                     <div class="modal-content animated fadeIn">
                                             <form id="updateticket" action="#" autocomplete="off">
                                                 
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <i class="fa fa-ticket modal-icon"></i>
+                                                    <h4 class="modal-title">Ticket # <span id="ticket_codigo"></span></h4>
+                                                    <h3>Factura # <span id="ticket_titulo"></span></h3>
+                                                    </div>
+
                                                 <div class="modal-body">
+
+                                                <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
+                                        
+                                                    <li class="info-element">
+                                                        <p><strong ># Documento: </strong><span id="num_factura"><span> </p>
+                                                        <p><strong >Fecha: </strong><span id="fecha_factura"><span> </p>
+                                                        <p><strong >Bodega: </strong><span id="bodega_factura"><span> </p>
+                                                        <p><strong >Vendedor: </strong><span id="vendedor_factura"><span> </p>
+                                                        <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
+                                                        <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
+                                                        <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
+                                                    
+                                                    </li>
+
+                                                    <li class="danger-element">
+                                                        <p><strong >Problema: </strong><span id="ticket_problema"><span></p>
+                                                        <input id="ticket_select_hidden" name="ticket_select_hidden" type="hidden" value="">
+                                                    </li>
+                                                
+                                                </ul>
+
+                                                    <div class="form-group">
+                                                        <label>Procedimiento</label> 
+                                                        <textarea class="form-control" id="txt_procedimiento" name="txt_procedimiento" rows="3" placeholder="Detalle del proceso para solventar el problema." maxlength="200" required></textarea>
+                                                    </div>
 
                                                     <div class="form-group">
                                                         <label>Solucion</label> 
                                                         <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Solucion que se ha dado al cliente." maxlength="200" required></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Autorizado por</label> 
+                                                        <input type="text" class="form-control" id="txt_autorizado" name="txt_autorizado" rows="3" placeholder="Quien autoriza el proceso y solucion." maxlength="50" required>
                                                     </div>
 
 

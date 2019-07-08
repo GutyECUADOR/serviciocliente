@@ -16,7 +16,7 @@ $(function() {
                             ${ row.codigo }
                         </td>
                         <td class="issue-info">
-                            <a href="#">
+                            <a>
                                  ${ row.titulo }
                             </a>
 
@@ -39,7 +39,7 @@ $(function() {
                                 <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu pull-right">
-                                <li><a class="btn-xs btn_add_solucion" data-codigo="${ row.codigo }"><i class="fa fa-check"></i> Ver detalle</a></li>
+                                <li><a class="btn-xs btn_edit_ticket" data-codigo="${ row.codigo }"><i class="fa fa-check"></i> Ver detalle</a></li>
                                     <li><a class="btn-xs btn_finalizar_ticket" data-codigo="${ row.codigo }"><i class="fa fa-thumbs-up"></i> Finalizar</a></li>
                                   
                                 </ul>
@@ -89,12 +89,86 @@ $(function() {
                 }
     
             });
+        },
+        searchTicketByID: function (codigo) {
+    
+            $.ajax({
+                url: 'ticket/getticket/'+codigo,
+                method: 'GET',
+                data: {codigo: codigo},
+               
+                success: function(response) {
+                    console.log(response);
+                    let responseJSON = JSON.parse(response);
+                    console.log(responseJSON);
+                    if (!responseJSON.ERROR) {
+                        app.showTicket(responseJSON.data);
+                    }else{
+                        console.log('No se pudo cargar la informacion del ticket, cierre la ventana y reintente');
+                    }
+                    
+                },
+                error: function(error) {
+                    alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
+                },
+                complete: function(data) {
+                    
+                }
+    
+            });
+        },
+        showTicket: function (ticketData) {
+        
+            $('#ticket_titulo').html(ticketData.facturaID);
+            $('#ticket_codigo').html(ticketData.codigo);
+            $('#ticket_problema').html(ticketData.problema);
+            $('#txt_procedimiento').val(ticketData.procedimiento);
+            $('#txt_solucion').val(ticketData.solucion);
+            $('#txt_autorizado').val(ticketData.autorizado);
+
+            $('#ID_facura').html(ticketData.ID);
+            $('#num_factura').html(ticketData.NUMERO);
+            $('#fecha_factura').html(ticketData.FECHA);
+            $('#bodega_factura_hidden').val(ticketData.codBodega);
+            $('#vendedor_factura').html('('+ticketData.codVendedor +') '+ ticketData.nombreVendedor);
+            $('#bodega_factura').html(ticketData.nombreBodega);
+            $('#ruc_factura').html(ticketData.RUCCliente);
+            $('#nombreCliente_factura').html(ticketData.nombreCliente);
+           
+        },
+        sendNotificacion: function(email) {
+            $.ajax({
+                url: 'ticket/sendEmailCliente',
+                method: 'GET',
+                data: { email: email},
+                
+                success: function(response) {
+                console.log(response);
+                let responseJSON = JSON.parse(response);
+                    console.log(responseJSON);
+                    if (responseJSON.error == false) {
+                        toastr.info('Correo enviado.', 'Realizado', {timeOut: 5000});
+                    
+                    }else if (responseJSON.error == true){
+                        toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
+                    }
+
+                
+                },
+                error: function(error) {
+                    console('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
+                    toastr.error('No se pudo realizar.', 'Upss', {timeOut: 2000})
+                },
+                complete: function(data) {
+                }
+
+            });
         }
     }
 
-
     // ON Ready
-    app.searchTickets('');
+    let input = $('#txtSearch').val();
+    app.searchTickets(input);
 
     // Events and Actions
     $('.input-group.date').datepicker({
@@ -107,43 +181,17 @@ $(function() {
         todayHighlight: true
     });
 
-    let registerForm = $('#registerticket');
-    registerForm.submit(function (event) {
+    $('#tbodyresults').on("click", ".btn_edit_ticket", function(event) {
         event.preventDefault();
-
-        $.ajax({
-            url: 'ticket/register',
-            method: 'POST',
-            data: registerForm.serialize(),
-
-            success: function(response) {
-                console.log(response);
-                let responseJSON = JSON.parse(response);
-                console.log(responseJSON);
-                console.log(registerForm.serialize());
-               
-                if (responseJSON.error == false) {
-                    toastr.success(responseJSON.message + 'ID de registro: ' + responseJSON.nuevo_id, 'Realizado', {timeOut: 5000});
-                    registerForm.trigger("reset");
-                }else if (responseJSON.error == true){
-                    toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
-                }
-                
-               
-               
-            },
-            error: function(error) {
-                alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
-            },
-            complete: function(data) {
-                
-            }
-
-            });
-
+        let codigo = $(this).data('codigo');
+        console.log(codigo);
+        app.searchTicketByID(codigo.trim());
+        $('#ticket_select_hidden').val(codigo);
+        $('#modal_add_solucion').modal('show');
+        
     })
 
-
+    
     let btnBuscar = $('#btnSearch');
     btnBuscar.click(function (event) {
         event.preventDefault();
@@ -151,24 +199,7 @@ $(function() {
         let input = $('#txtSearch').val();
         console.log(input)
         
-
-        if (input.length <= 0) {
-            toastr.error('Indique parametros de busqueda', 'Atencion', {timeOut: 2000});
-            return;
-        }
-
         app.searchTickets(input);
-
-    })
-
-    $('#tbodyresults').on("click", ".btn_add_solucion", function(event) {
-        event.preventDefault();
-        let ID = $(this).data('codigo');
-        let dbcode = $('#selectEmpresa').val();
-        console.log(ID);
-        $('#modal_add_solucion').modal('show');
-       /*  $('#facturaID').val(ID);
-        app.searchFacturaByID(ID, dbcode); */
 
     })
 
@@ -187,10 +218,12 @@ $(function() {
                 console.log(response);
                 let responseJSON = JSON.parse(response);
                     if (responseJSON.error == false) {
-                        toastr.success(responseJSON.message, 'Realizado', {timeOut: 5000});
+                        toastr.success(responseJSON.message, 'Realizado', {timeOut: 3000});
+                        let emailtest = 'gutiecuador@gmail.com';
+                        app.sendNotificacion(emailtest);
                     
                     }else if (responseJSON.error == true){
-                        toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
+                        toastr.error(responseJSON.message, 'Error', {timeOut: 3000});
                     }
 
                 
@@ -200,14 +233,61 @@ $(function() {
                     toastr.error('No se pudo realizar.', 'Upss', {timeOut: 2000})
                 },
                 complete: function(data) {
-                app.searchTickets('');
+                    let input = $('#txtSearch').val();
+                    app.searchTickets(input);
                 }
 
             });
         }
 
         
-     })
+    });
     
+    let updateForm = $('#updateticket');
+    updateForm.submit(function (event) {
+        event.preventDefault();
+
+        let ticketSeleccionado = $('#ticket_select_hidden').val();
+
+        let input = $('#txtSearch').val();
+        let data = updateForm.serializeArray();
+        data.push({name: 'ticket', value:ticketSeleccionado});
+
+        $.ajax({
+            url: 'ticket/update',
+            method: 'POST',
+            data: data,
+
+            success: function(response) {
+                console.log(response);
+                let responseJSON = JSON.parse(response);
+                console.log(responseJSON);
+                console.log(data);
+               
+                if (responseJSON.error == false) {
+                    toastr.success(responseJSON.message, 'Realizado', {timeOut: 3000});
+                    let input = $('#txtSearch').val();
+                    app.searchTickets(input);
+                    updateForm.trigger("reset");
+                    
+                }else if (responseJSON.error == true){
+                    toastr.error(responseJSON.message, 'Error', {timeOut: 5000});
+                }
+                
+               
+               
+            },
+            error: function(error) {
+                alert('No se pudo completar la operación. #' + error.status + ' ' + error.statusText, '. Intentelo mas tarde.');
+            },
+            complete: function(data) {
+                $('#modal_add_solucion').modal('hide');
+            }
+
+            });
+
+    });
+
+
 
 });
