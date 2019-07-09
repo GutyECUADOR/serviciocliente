@@ -155,6 +155,7 @@
                                                         <input id="bodega_factura_hidden" name="bodega_factura_hidden" type="hidden" value="">
                                                         <p><strong >RUC:</strong><span id="ruc_factura"><span> </p>
                                                         <p><strong >Cliente: </strong><span id="nombreCliente_factura"><span> </p>
+                                                        <p><strong >Email: </strong><span id="correoCliente_factura"><span> </p>
                                                     
                                                     </li>
 

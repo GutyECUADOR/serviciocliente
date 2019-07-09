@@ -86,3 +86,31 @@ User:  - July 9, 2019, 12:11 am
 PCid: SISTEMAS01
 Detail: Email enviado a : gutiecuador@gmail.com
 -------------------------
+User:  - July 9, 2019, 9:22 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : gutiecuador@gmail.com
+-------------------------
+User:  - July 9, 2019, 10:02 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : gutiecuador@gmail.com
+-------------------------
+User:  - July 9, 2019, 10:22 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : gutiecuador@gmail.com
+-------------------------
+User:  - July 9, 2019, 11:09 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - July 9, 2019, 11:12 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - July 9, 2019, 11:40 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - July 9, 2019, 11:43 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------

@@ -44,7 +44,7 @@ class Ticket extends CI_Controller {
 			
 		
             // Checking if everything is there
-            if ($bodega && $facturaID && $referencia &&  $titulo && $problema && $procedimiento && $autorizado ) {
+            if ($bodega && $facturaID && $referencia &&  $titulo && $problema && $procedimiento ) {
 
 				$ticket = $this->newticket();
 				
@@ -132,7 +132,11 @@ class Ticket extends CI_Controller {
 	
 	public function sendEmailCliente() {
 
-		$email = $this->input->get('email');
+		$codigo = $this->input->get('ticket'); //Ticket KAO00000X
+		$ticketINFO = $this->usuario->getTicketByCodigo($codigo);
+
+		$email = trim($ticketINFO->emailCliente);
+		$solucion = trim($ticketINFO->solucion);
 
 		if (empty($email)) {
 			$response = array('error' => TRUE, 'mensaje' => 'Email vacio, indique correo valido para enviar notificacion' );
@@ -149,23 +153,29 @@ class Ticket extends CI_Controller {
             //Server settings
             $mail->SMTPDebug = false;                                 // Enable verbose debug output 0->off 2->debug
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
+            $mail->Host = 'mail.sudcompu.net';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'kaomantenimientos@hotmail.com';                 // SMTP username
-            $mail->Password = 'kaomnt2019$$';                           // SMTP password
+            $mail->Username = 'noreply@kaosportcenter.com';                 // SMTP username
+            $mail->Password = 'noreply2019$·';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;  
         
             //Recipients
-            $mail->setFrom('kaomantenimientos@hotmail.com');
+            $mail->setFrom('noreply@kaosportcenter.com');
             $mail->addAddress($correoCliente);
             $mail->addCC('soporteweb@sudcompu.net');
            
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Notificacion de ticket';
-            $mail->AltBody = 'Notificacion de registro';
-            $mail->Body    =  $this->load->view('emailRegisterHTML', '', true);
+			$mail->AltBody = 'Notificacion de registro';
+			
+			if (!empty($solucion)) {
+				$mail->Body    =  $this->load->view('emailTicketSolucionadoHTML', '', true);
+			}else {
+				$mail->Body    =  $this->load->view('emailNoSolucionTickerHTML', '', true);
+			}
+           
             
         
             $mail->send();

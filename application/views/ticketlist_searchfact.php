@@ -206,22 +206,22 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Referencia</label> 
+                                                            <label>Referencia (Medio a travez del cual se notifica)</label> 
                                                             <input type="text" id="referencia" name="referencia" placeholder="Link del chat en red social, Llamada telefonica, etc" maxlength="150" class="form-control" required>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Titulo</label> 
+                                                            <label>Problema</label> 
                                                             <input type="text" id="titulo" name="titulo" placeholder="Descripcion rapida del problema" class="form-control" maxlength="70" required>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Problema</label> 
+                                                            <label>Detalle del Problema</label> 
                                                             <textarea class="form-control" id="txt_problema" name="txt_problema" rows="3" placeholder="Descripcion detallada del problema" maxlength="200" required></textarea>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Procedimiento</label> 
+                                                            <label>Procedimiento a seguir</label> 
                                                             <textarea class="form-control" id="txt_procedimiento" name="txt_procedimiento" rows="3" placeholder="Indique como se procederá a solucionar" maxlength="200" required></textarea>
                                                         </div>
 
@@ -232,7 +232,7 @@
 
                                                         <div class="form-group">
                                                             <label>Autorizado por</label> 
-                                                            <input type="text" class="form-control" id="txt_autorizado" name="txt_autorizado" rows="3" placeholder="Quien autoriza el proceso y solucion." maxlength="50" required>
+                                                            <input type="text" class="form-control" id="txt_autorizado" name="txt_autorizado" rows="3" placeholder="Quien autoriza el proceso y solucion." maxlength="50">
                                                         </div>
 
 
@@ -255,8 +255,9 @@
                                     <div class="input-group">
                                         <input style="width: 70% !important;" type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class="form-control">
                                         <select style="width: 30% !important;" id="selectEmpresa" class="form-control">
-                                            <option value='002'>Quito (Kindred)</option>
-                                            <option value='006'>Guayaquil (Comerc. Kinsman)</option>
+                                            <option value='002'>Region Sierra (KIND)</option>
+                                            <option value='006'>Region Costa (SCK)</option>
+                                            <option value='001'>Impor_KAO</option>
                                             <option value='008'>Modelo</option>
                                             <option value='009'>Modelo IMPKAO</option>
                                             

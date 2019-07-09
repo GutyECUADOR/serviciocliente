@@ -134,13 +134,15 @@ $(function() {
             $('#bodega_factura').html(ticketData.nombreBodega);
             $('#ruc_factura').html(ticketData.RUCCliente);
             $('#nombreCliente_factura').html(ticketData.nombreCliente);
+            $('#correoCliente_factura').html(ticketData.emailCliente);
            
         },
-        sendNotificacion: function(email) {
+        sendNotificacion: function(ticket) {
+            console.log(ticket);
             $.ajax({
                 url: 'ticket/sendEmailCliente',
                 method: 'GET',
-                data: { email: email},
+                data: { ticket: ticket},
                 
                 success: function(response) {
                 console.log(response);
@@ -219,8 +221,7 @@ $(function() {
                 let responseJSON = JSON.parse(response);
                     if (responseJSON.error == false) {
                         toastr.success(responseJSON.message, 'Realizado', {timeOut: 3000});
-                        let emailtest = 'gutiecuador@gmail.com';
-                        app.sendNotificacion(emailtest);
+                        app.sendNotificacion(codigo);
                     
                     }else if (responseJSON.error == true){
                         toastr.error(responseJSON.message, 'Error', {timeOut: 3000});
