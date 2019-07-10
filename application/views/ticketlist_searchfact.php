@@ -128,7 +128,7 @@
                             <div class="ibox-title">
                                 <h5>Lista de Items</h5>
                                 <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a>
+                                    <!-- <a href="" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_new_ticket">Crear nuevo ticket</a> -->
                                 </div>
                             
                                 <!-- start modal -->
