@@ -42,6 +42,7 @@ class Usuario extends CI_Model {
     }
 
     public function getAllDataBaseList() {
+        $this->sbio_db->where_in('Codigo', array('001','002','006','008'));
 		$query = $this->sbio_db->get('Empresas_WF');
 		$resultSet = $query->result();
 		return $resultSet;
