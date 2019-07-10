@@ -173,7 +173,7 @@
 
                                                     <div class="form-group">
                                                         <label>Solucion</label> 
-                                                        <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Solucion que se ha dado al cliente." maxlength="200" required></textarea>
+                                                        <textarea class="form-control" id="txt_solucion" name="txt_solucion" rows="3" placeholder="Solucion que se ha dado al cliente." maxlength="200"></textarea>
                                                     </div>
 
                                                     <div class="form-group">

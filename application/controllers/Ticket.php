@@ -98,7 +98,7 @@ class Ticket extends CI_Controller {
 			$ticket = $this->input->post('ticket');
 		
             // Checking if everything is there
-            if ( $solucion && $ticket && $procedimiento && $autorizado) {
+            if ( $ticket && $procedimiento && $autorizado) {
 
                 $data = array(
 					'procedimiento' => $procedimiento,
@@ -139,10 +139,16 @@ class Ticket extends CI_Controller {
 		$solucion = trim($ticketINFO->solucion);
 
 		if (empty($email)) {
-			$response = array('error' => TRUE, 'mensaje' => 'Email vacio, indique correo valido para enviar notificacion' );
+			$response = array('error' => TRUE, 'message' => 'Email vacio, indique correo valido para enviar notificacion' );
 			echo json_encode($response);
 			return;
 		}
+
+		// Remover luego de modificar los HTML Email
+			$response = array('error' => TRUE, 'message' => 'Envio de email ha sido negado' );
+			echo json_encode($response);
+			return;
+		// Fin Remover
 
         $mail = $this->customemail->load();
 
@@ -192,7 +198,7 @@ class Ticket extends CI_Controller {
                   }
                 file_put_contents('logs/logMailOK.txt', $log, FILE_APPEND );
             
-            $response = array('error' => FALSE, 'mensaje' => $detalleMail );
+            $response = array('error' => FALSE, 'message' => $detalleMail );
             echo json_encode($response);
 
         } catch (Exception $e) {
@@ -206,7 +212,7 @@ class Ticket extends CI_Controller {
                 file_put_contents('logs/logMailError.txt', $log, FILE_APPEND);
                 $detalleMail = 'Error al enviar el correo. Mailer Error: '. $mail->ErrorInfo;
                
-            $response = array('error' => TRUE, 'mensaje' => $detalleMail ); 
+            $response = array('error' => TRUE, 'message' => $detalleMail ); 
             echo json_encode($response);
         }
     }
