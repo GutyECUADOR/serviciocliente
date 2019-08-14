@@ -207,7 +207,13 @@
 
                                                         <div class="form-group">
                                                             <label>Referencia (Medio a travez del cual se notifica)</label> 
-                                                            <input type="text" id="referencia" name="referencia" placeholder="Link del chat en red social, Llamada telefonica, etc" maxlength="150" class="form-control" required>
+                                                            
+                                                            <select class="form-control m-b" id="referencia" name="referencia">
+                                                                <option value='RedSocial'>Rodes Sociales Facebook, Twitter, Instagram, etc.</option>
+                                                                <option value='Llamada'>Llamada telefonica</option>
+                                                                <option value='VisitaLocal'>Visita a locales de KAO</option>
+                                                            </select>
+                                                       
                                                         </div>
 
                                                         <div class="form-group">
