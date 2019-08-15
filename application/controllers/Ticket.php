@@ -145,9 +145,9 @@ class Ticket extends CI_Controller {
 		}
 
 		// Remover luego de modificar los HTML Email
-			$response = array('error' => TRUE, 'message' => 'Envio de email ha sido negado' );
+			/* $response = array('error' => TRUE, 'message' => 'Envio de email ha sido negado' );
 			echo json_encode($response);
-			return;
+			return; */
 		// Fin Remover
 
         $mail = $this->customemail->load();
@@ -173,8 +173,8 @@ class Ticket extends CI_Controller {
            
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Notificacion de ticket';
-			$mail->AltBody = 'Notificacion de registro';
+            $mail->Subject = 'Notificacion de ticket # '.$codigo;
+			$mail->AltBody = 'Notificacion de ticket';
 			
 			if (!empty($solucion)) {
 				$mail->Body    =  $this->load->view('emailTicketSolucionadoHTML', '', true);

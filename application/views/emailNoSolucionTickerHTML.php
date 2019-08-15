@@ -319,7 +319,7 @@
                                 </tbody>
                                 </table>
                             
-                                <p>Estimado cliente, lamentamos no haber resuelto su inconveniente, dispondra de un descuento en la siguiente compra, gracias.</p>
+                                <p>Estimado cliente la solicitud a su reclamo a sido denegada, por no cumplir con nuestras politicas de garantia. Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente 2557115</p>
 
                             
                             <p>Muchas gracias por su confianza!</p>

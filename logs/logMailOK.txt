@@ -114,3 +114,19 @@ User:  - July 9, 2019, 11:43 pm
 PCid: SISTEMAS01
 Detail: Email enviado a : soporteweb@sudcompu.net
 -------------------------
+User:  - August 15, 2019, 5:12 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - August 15, 2019, 5:14 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - August 15, 2019, 5:15 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------
+User:  - August 15, 2019, 5:19 pm
+PCid: SISTEMAS01
+Detail: Email enviado a : soporteweb@sudcompu.net
+-------------------------

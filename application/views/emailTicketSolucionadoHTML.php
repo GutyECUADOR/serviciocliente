@@ -319,9 +319,8 @@
                                 </tbody>
                                 </table>
                             
-                                <p>Estimado cliente, estamos solventando su inconveniente.</p>
+                                <p>Estimado Cliente la solicitud a su reclamo a sido aceptada, su cambio lo realizaremos en la tienda donde presento su reclamo. Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente 2557115</p>
 
-                            
                             <p>Muchas gracias por su confianza!</p>
                             </td>
                         </tr>
