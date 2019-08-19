@@ -319,9 +319,12 @@
                                 </tbody>
                                 </table>
                             
-                                <p>Estimado Cliente la solicitud a su reclamo a sido aceptada, su cambio lo realizaremos en la tienda donde presento su reclamo. Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente 2557115</p>
+                                <p>Estimado Cliente, </p>
+                                <p>La solicitud a su reclamo ha sido aceptada. </p>
+                                <p> Realizaremos el cambio en la tienda, donde presento su reclamo, con la factura correspondiente. </p>
+                                <p>Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente (02) 2252505 ext 1302 o al email servicioalcliente@kaosportcenter.com</p>
 
-                            <p>Muchas gracias por su confianza!</p>
+                                <p>Muchas gracias por su confianza!</p>
                             </td>
                         </tr>
                         </table>

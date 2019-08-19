@@ -319,7 +319,9 @@
                                 </tbody>
                                 </table>
                             
-                                <p>Estimado cliente la solicitud a su reclamo a sido denegada, por no cumplir con nuestras politicas de garantia. Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente 2557115</p>
+                                <p>Estimado Cliente, </p>
+                                <p>Lamentamos informarle que la solicitud a su reclamo ha sido denegada, por no cumplir con nuestras politicas de garantia. </p>
+                                <p>Para cualquier detalle o informacion comuniquese a cualquiera de nuestros canales de atencion. O a linea de atencion al cliente (02) 2252505 ext 1302 o al email servicioalcliente@kaosportcenter.com</p>
 
                             
                             <p>Muchas gracias por su confianza!</p>
