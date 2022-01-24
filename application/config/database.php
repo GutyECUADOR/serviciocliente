@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOKIND_V7',
+	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=KINDRED_V7',
 	'username' => 'programacion',
 	'password' => 'progra123',
 	'database' => '',
@@ -230,6 +230,28 @@ $db['008'] = array(
 $db['009'] = array(
 	'dsn'	=> '',
 	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOIMPK_V7',
+	'username' => 'programacion',
+	'password' => 'progra123',
+	'database' => '',
+	'dbdriver' => 'pdo',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['011'] = array(
+	'dsn'	=> '',
+	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=DBASPORT_V7',
 	'username' => 'programacion',
 	'password' => 'progra123',
 	'database' => '',

@@ -25,13 +25,13 @@ class Login extends CI_Controller {
 
 			$dataDB = $this->usuario->checklogin($usuario, $password);
 
-			if ($usuario==trim($dataDB->Cedula) && $password==trim($dataDB->Clave)) {
+			if ($usuario==trim($dataDB->Codigo) && $password==trim($dataDB->xPassWord)) {
 				$newdata = array(
 					'usercode'  => $dataDB->Codigo,
 					'codedatabase' => $codedatabase,
 					'cedula' => $dataDB->Cedula,
-					'nombreusuario'  => $dataDB->Nombre . $dataDB->Apellido,
-					'user_role'     => trim($dataDB->CodDpto),
+					'nombreusuario'  => $dataDB->Nombre,
+					'user_role'     => 'ADM',
 					'logged_in' => TRUE
 				);
 			

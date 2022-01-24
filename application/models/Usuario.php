@@ -33,16 +33,20 @@ class Usuario extends CI_Model {
 
     public function checklogin($usuario, $password) {
         
-        $this->sbio_db->select('Codigo, Nombre, Apellido, Cedula, CodDpto, Clave');
-        $this->sbio_db->where('Cedula', $usuario);
-        $this->sbio_db->where('Clave', $password);
-		$query =  $this->sbio_db->get('Empleados');
+        $query = $this->empresa_db->query("
+            SELECT 
+                *,
+                CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('IsaacBetito',xPassWord)) As xPassWord 
+            FROM USUARIOS WITH(NOLOCK)
+            WHERE Codigo = '$usuario'
+            ORDER BY codigo
+            ");
 		$resultSet = $query->row();
 		return $resultSet;
     }
 
     public function getAllDataBaseList() {
-        $this->sbio_db->where_in('Codigo', array('001','002','006','008'));
+        $this->sbio_db->where_in('Codigo', array('001','002','006','008','011'));
 		$query = $this->sbio_db->get('Empresas_WF');
 		$resultSet = $query->result();
 		return $resultSet;
