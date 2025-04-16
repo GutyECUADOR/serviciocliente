@@ -54,7 +54,7 @@
                         <option value="">Seleccione empresa por favor</option>
                             <?php 
                                 foreach ($databasesArray as $row) {
-                                    echo "<option value='$row->Codigo'>$row->Nombre</option>";
+                                    echo "<option value='$row->Codigo'>$row->Nombre ($row->NameDatabase)</option>";
                                 }
                             ?>
                     </select>
