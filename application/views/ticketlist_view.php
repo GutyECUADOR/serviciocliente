@@ -36,7 +36,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element"> 
                             <span>
-                                <img src="http://kaosportcenter.com/img/logoKAOdark.png" height="25px" alt="logo">
+                                <img src="./assets/img/logo.png" height="25px" alt="logo">
                             </span>
                             <?php  echo 'DataBase, '. $this->session->userdata('codedatabase'); ?>
                         </div>

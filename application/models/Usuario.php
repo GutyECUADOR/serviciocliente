@@ -52,6 +52,7 @@ class Usuario extends CI_Model {
     }
 
     public function getAllDataBaseList() {
+        $this->sbio_db->where_in('NameDatabase', array('IMPORKAO_2023','KINDRED_2023','DBASPORT_2023','MODELOKIND_V7','MODELOIMPK_V7',));
 		$query = $this->sbio_db->get('Empresas_WF');
 		$resultSet = $query->result();
 		return $resultSet;
@@ -63,7 +64,7 @@ class Usuario extends CI_Model {
 		return $resultSet;
     }
 
-    public function gettickets($search='KAO') {
+    public function gettickets($search) {
         $codeempresa = $this->session->userdata('codedatabase');
 		$query = $this->empresa_db->query("
 			SELECT TOP 100
@@ -77,8 +78,8 @@ class Usuario extends CI_Model {
 				dbo.VEN_CAB
 				INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
 				INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
-				INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
-			WHERE ticket.empresa ='$codeempresa' AND (cliente.NOMBRE LIKE '$search%' or ticket.codigo LIKE '$search%')
+				INNER JOIN WSSP.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+			WHERE ticket.empresa ='$codeempresa' AND (cliente.RUC ='$search' OR cliente.NOMBRE LIKE '$search%' or ticket.codigo LIKE '$search%')
             ORDER BY ticket.codigo DESC
             ");
 		return $query->result_array();
@@ -86,8 +87,7 @@ class Usuario extends CI_Model {
        
     }
     
-    public function getfacturaByID($ID, $db_code='008') {
-        $this->empresa_db = $this->load->database($db_code, TRUE);
+    public function getfacturaByID($ID) {
 		$query = $this->empresa_db->query("
         SELECT TOP 1
             VEN_CAB.ID,
@@ -108,7 +108,7 @@ class Usuario extends CI_Model {
             INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
             INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
             INNER JOIN dbo.COB_VENDEDORES as vendedor on vendedor.CODIGO = VEN_CAB.CODVEN
-            LEFT JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+            LEFT JOIN WSSP.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
                         
         WHERE
             VEN_CAB.ID = '$ID'
@@ -143,7 +143,7 @@ class Usuario extends CI_Model {
                 INNER JOIN dbo.COB_CLIENTES as cliente on cliente.CODIGO = VEN_CAB.CLIENTE
                 INNER JOIN dbo.INV_BODEGAS as bodega on bodega.CODIGO = VEN_CAB.BODEGA
                 INNER JOIN dbo.COB_VENDEDORES as vendedor on vendedor.CODIGO = VEN_CAB.CODVEN
-                INNER JOIN KAO_wssp.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
+                INNER JOIN WSSP.dbo.tickets_serviciocliente as ticket on ticket.facturaID collate Modern_Spanish_CI_AS = VEN_CAB.ID
                                     
             WHERE
                 ticket.codigo = '$codigo'
@@ -152,12 +152,19 @@ class Usuario extends CI_Model {
 		return $query->row();
 	}
 
-    public function getfacturaMOVByID($ID='', $db_code='008') {
-        $this->empresa_db = $this->load->database($db_code, TRUE);
+    public function getfacturaMOVByID($ID) {
 		$query = $this->empresa_db->query("
         SELECT
             producto.Nombre,
-            VEN_MOV.*
+            VEN_MOV.ID,
+			VEN_MOV.FECHA,
+			VEN_MOV.CLIENTE,
+			VEN_MOV.BODEGA,
+			VEN_MOV.CODIGO,
+			VEN_MOV.PRECIO,
+            VEN_MOV.DESCU,
+			VEN_MOV.IVA,
+			VEN_MOV.PRECIOTOT
 
         FROM 
             dbo.VEN_MOV
@@ -170,8 +177,7 @@ class Usuario extends CI_Model {
        
 	}
 
-    public function getfacturas($search='', $db_code='008') {
-        $this->empresa_db = $this->load->database($db_code, TRUE);
+    public function getfacturas($search='') {
 		$query = $this->empresa_db->query("
         SELECT TOP 100
             VEN_CAB.ID as idFactura,

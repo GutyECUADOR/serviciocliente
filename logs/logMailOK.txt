@@ -130,3 +130,7 @@ User:  - August 15, 2019, 5:19 pm
 PCid: SISTEMAS01
 Detail: Email enviado a : soporteweb@sudcompu.net
 -------------------------
+User:  - April 16, 2025, 10:31 pm
+PCid: DELL5577-JOSÉ
+Detail: Email enviado a : guti06@hotmail.es;
+-------------------------

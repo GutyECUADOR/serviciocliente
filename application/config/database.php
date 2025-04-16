@@ -139,7 +139,7 @@ $db['sbio'] = array(
 	'save_queries' => TRUE
 );
 
-$db['001'] = array(
+$db['IMPORKAO_2023'] = array(
 	'dsn'	=> '',
 	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=IMPORKAO_2023',
 	'username' => 'wssp',
@@ -161,7 +161,7 @@ $db['001'] = array(
 	'save_queries' => TRUE
 );
 
-$db['002'] = array(
+$db['KINDRED_2023'] = array(
 	'dsn'	=> '',
 	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=KINDRED_2023',
 	'username' => 'wssp',
@@ -183,9 +183,9 @@ $db['002'] = array(
 	'save_queries' => TRUE
 );
 
-$db['006'] = array(
+$db['DBASPORT_2023'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=SCKINSMAN_V7',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=DBASPORT_2023',
 	'username' => 'wssp',
 	'password' => 'Progra2023$',
 	'database' => '',
@@ -205,7 +205,7 @@ $db['006'] = array(
 	'save_queries' => TRUE
 );
 
-$db['008'] = array(
+$db['MODELOKIND_V7'] = array(
 	'dsn'	=> '',
 	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=MODELOKIND',
 	'username' => 'wssp',
@@ -227,7 +227,7 @@ $db['008'] = array(
 	'save_queries' => TRUE
 );
 
-$db['009'] = array(
+$db['MODELOIMPK_V7'] = array(
 	'dsn'	=> '',
 	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=MODELOIMPK',
 	'username' => 'wssp',
@@ -249,24 +249,3 @@ $db['009'] = array(
 	'save_queries' => TRUE
 );
 
-$db['011'] = array(
-	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=DBASPORT_V7',
-	'username' => 'wssp',
-	'password' => 'Progra2023$',
-	'database' => '',
-	'dbdriver' => 'pdo',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);

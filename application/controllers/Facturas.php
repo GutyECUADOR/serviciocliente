@@ -12,7 +12,8 @@ class Facturas extends CI_Controller {
 	{
 		if ($this->session->userdata('logged_in')) {
 			$arraybodegas = $this->getbodegas();
-			$this->load->view('ticketlist_searchfact', compact('arraybodegas'));
+			$databasesArray = $this->usuario->getAllDataBaseList();
+			$this->load->view('ticketlist_searchfact', compact('databasesArray','arraybodegas'));
 			
 		}else{
 			$databasesArray = $this->usuario->getAllDataBaseList();
@@ -23,11 +24,9 @@ class Facturas extends CI_Controller {
 
 	public function getFacturas(){
 		$search = $this->input->get('search');
-		$dbcode = $this->input->get('dbcode');
-
-		if ($search && $dbcode) {
-			$resultSet = $this->usuario->getfacturas($search, $dbcode);
-        	echo json_encode(array('ERROR' => FALSE, 'data' => $resultSet));
+		$resultSet = $this->usuario->getfacturas($search);
+		if ($resultSet) {
+			echo json_encode(array('ERROR' => FALSE, 'data' => $resultSet));
 		}else{
 			echo json_encode(array('ERROR' => TRUE, 'data' => ''));
 		}
@@ -36,23 +35,14 @@ class Facturas extends CI_Controller {
 
 	public function getFactura(){
 		$VEN_CAB = $this->input->get('ID');
-		$dbcode = $this->input->get('dbcode');
-
-		if ($VEN_CAB && $dbcode) {
+		$resultSetCAB = $this->usuario->getfacturaByID($VEN_CAB);
+		$resultSetMOV = $this->usuario->getfacturaMOVByID($VEN_CAB);
+		
+		$response = array('documento' => $resultSetCAB,
+					'movimientos' => $resultSetMOV
+					);
 			
-			if ($resultSetCAB = $this->usuario->getfacturaByID($VEN_CAB, $dbcode)) {
-				$resultSetMOV = $this->usuario->getfacturaMOVByID($VEN_CAB, $dbcode);
-				echo json_encode(array('ERROR' => FALSE, 
-									'documento' => $resultSetCAB,
-									'movimientos' => $resultSetMOV
-									));
-			}else {
-				echo json_encode(array('ERROR' => TRUE, 'documento' => '', 'message'=>'No se pudo comlpetar la operacion'));
-			}
-        	
-		}else{
-			echo json_encode(array('ERROR' => TRUE, 'documento' => '', 'message'=>'Codigo o ID de factura no valido'));
-		}
+        echo json_encode($response);
 		
 	}
 

@@ -259,15 +259,8 @@
                                 <div class="m-b-lg">
                      
                                     <div class="input-group">
-                                        <input style="width: 70% !important;" type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class="form-control">
-                                        <select style="width: 30% !important;" id="selectEmpresa" class="form-control">
-                                            <option value='002'>Region Sierra (KIND)</option>
-                                            <option value='006'>Region Costa (SCK)</option>
-                                            <option value='001'>Impor_KAO</option>
-                                            <option value='008'>Modelo</option>
-                                            <option value='009'>Modelo IMPKAO</option>
-                                            
-                                        </select>
+                                        <input type="text" id="txtSearch" placeholder="Nombre del cliente o RUC" class="form-control">
+                                        
                                         <span class="input-group-btn">
                                             <button id="btnSearch" type="button" class="btn btn-primary"> Buscar</button>
                                         </span>
@@ -337,7 +330,7 @@
    <script src="<?php echo base_url()?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
-    <script src="<?php echo base_url()?>assets/js/pages/ticketlist_searchfact.js"></script>
+    <script src="<?php echo base_url()?>assets/js/pages/ticketlist_searchfact.js?<?php echo date('Ymdhiiss')?>"></script>
    
 </body>
 

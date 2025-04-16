@@ -54,7 +54,7 @@
                         <option value="">Seleccione empresa por favor</option>
                             <?php 
                                 foreach ($databasesArray as $row) {
-                                    echo "<option value='$row->Codigo'>$row->Nombre ($row->NameDatabase)</option>";
+                                    echo "<option value='$row->NameDatabase'>$row->Nombre ($row->NameDatabase)</option>";
                                 }
                             ?>
                     </select>
@@ -67,7 +67,7 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Ingresar</button>
-                <a href="http://196.168.1.202:8050/wssp" class="btn btn-danger block full-width m-b">Menú Principal</a>
+                <a href="http://196.168.1.243:8050/wssp" class="btn btn-danger block full-width m-b">Menú Principal</a>
 
                 
                

@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ticket extends CI_Controller {
 
-
 	private $codeDB;
 
 	public function __constructor() {
@@ -18,7 +17,8 @@ class Ticket extends CI_Controller {
 
 		if ($this->session->userdata('logged_in')) { 
 				$arraybodegas = $this->getbodegas();
-				$this->load->view('ticketlist_view', compact('arraybodegas'));
+				$databasesArray = $this->usuario->getAllDataBaseList();
+				$this->load->view('ticketlist_view', compact('arraybodegas','databasesArray'));
 				
 			}else{
 				$databasesArray = $this->usuario->getAllDataBaseList();
@@ -32,7 +32,7 @@ class Ticket extends CI_Controller {
 		
 		if (!empty($_POST)) {
 			
-			$empresa = strtoupper($this->input->post('empresa'));
+			$empresa = $this->session->userdata('codedatabase');
             $bodega = strtoupper($this->input->post('bodega'));
 			$facturaID = strtoupper($this->input->post('facturaID'));
 			$referencia = $this->input->post('referencia');

@@ -105,11 +105,11 @@ $(function() {
     
           
         },
-        searchFacturas: function (search, dbcode) {
+        searchFacturas: function (search) {
             $.ajax({
                 url: 'facturas/getfacturas',
                 method: 'GET',
-                data: {search: search, dbcode: dbcode},
+                data: {search: search},
                
                 success: function(response) {
                     console.log(response);
@@ -187,16 +187,15 @@ $(function() {
         event.preventDefault();
 
         let input = $('#txtSearch').val();
-        let dbcode = $('#selectEmpresa').val();
+       
         console.log(input)
-        
-
+    
         if (input.length <= 0) {
             toastr.error('Indique parametros de busqueda', 'Atencion', {timeOut: 2000});
             return;
         }
 
-        app.searchFacturas(input, dbcode);
+        app.searchFacturas(input);
 
     })
 
@@ -205,12 +204,10 @@ $(function() {
         event.preventDefault();
 
         let bodega = $('#bodega_factura_hidden').val();
-        let empresa = $('#selectEmpresa').val();
-
+      
         let data = registerForm.serializeArray();
         data.push({name: 'bodega', value:bodega});
-        data.push({name: 'empresa', value:empresa});
-
+       
         $.ajax({
             url: 'ticket/register',
             method: 'POST',
