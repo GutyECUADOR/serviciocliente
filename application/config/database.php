@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=KINDRED_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=MODELOKIND',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -97,9 +97,9 @@ $db['default'] = array(
 
 $db['wssp'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=KAO_wssp',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=WSSP',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -119,9 +119,9 @@ $db['wssp'] = array(
 
 $db['sbio'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=SBIOKAO',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=SBIOKAO',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -141,9 +141,9 @@ $db['sbio'] = array(
 
 $db['001'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=IMPORKAO_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=IMPORKAO_2023',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -163,9 +163,9 @@ $db['001'] = array(
 
 $db['002'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=KINDRED_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=KINDRED_2023',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -185,9 +185,9 @@ $db['002'] = array(
 
 $db['006'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=SCKINSMAN_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=SCKINSMAN_V7',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -207,9 +207,9 @@ $db['006'] = array(
 
 $db['008'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOKIND_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=MODELOKIND',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -229,9 +229,9 @@ $db['008'] = array(
 
 $db['009'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=MODELOIMPK_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=MODELOIMPK',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -251,9 +251,9 @@ $db['009'] = array(
 
 $db['011'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:Server=196.168.1.201;Database=DBASPORT_V7',
-	'username' => 'programacion',
-	'password' => 'progra123',
+	'hostname' => 'sqlsrv:Server=196.168.1.241;Database=DBASPORT_V7',
+	'username' => 'wssp',
+	'password' => 'Progra2023$',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',

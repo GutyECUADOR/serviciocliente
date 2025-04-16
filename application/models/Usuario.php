@@ -4,6 +4,7 @@ class Usuario extends CI_Model {
     private $sbio_db;
     private $wssp_db;
     private $empresa_db;
+    private $codeDB;
 
     public function __construct(){
         parent::__construct();
@@ -35,10 +36,15 @@ class Usuario extends CI_Model {
         
         $query = $this->empresa_db->query("
             SELECT 
-                *,
-                CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('IsaacBetito',xPassWord)) As xPassWord 
+                Codigo,
+                Grupo,
+                Nombre,
+                Supervisor,
+                CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('OnlySoft2009*',xPassWord)) As xPassWord,
+                CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('IsaacBetito',xPassWord)) As xPassWord1 
             FROM USUARIOS WITH(NOLOCK)
-            WHERE Codigo = '$usuario'
+            WHERE Codigo = '$usuario' AND CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('OnlySoft2009*',xPassWord)) = '$password'
+                OR Codigo = '$usuario' AND CONVERT(VARCHAR(20),DECRYPTBYPASSPHRASE('IsaacBetito',xPassWord)) = '$password'
             ORDER BY codigo
             ");
 		$resultSet = $query->row();
@@ -46,7 +52,6 @@ class Usuario extends CI_Model {
     }
 
     public function getAllDataBaseList() {
-        $this->sbio_db->where_in('Codigo', array('001','002','006','008','011'));
 		$query = $this->sbio_db->get('Empresas_WF');
 		$resultSet = $query->result();
 		return $resultSet;

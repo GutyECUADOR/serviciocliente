@@ -271,7 +271,7 @@
    <script src="<?php echo base_url()?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
-    <script src="<?php echo base_url()?>assets/js/pages/tickets.js"></script>
+    <script src="<?php echo base_url()?>assets/js/pages/tickets.js?<?php echo date('Ymdhiiss')?>"></script>
    
 </body>
 
